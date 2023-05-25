@@ -23,16 +23,18 @@ jQuery(() => {
     $(".category-carousel").owlCarousel({
         margin:10,
         lazyLoad:true,
-        stagePadding: 15,
+        stagePadding: false,
         responsive: {
             576: {
                 items: 3,
+                stagePadding: 15,
                 nav: false,
                 dots: false,
                 autoplayHoverPause: false,
             },
             768 : {
                 items: 3,
+                stagePadding: 15,
                 nav: false,
                 dots: false,
                 autoplayHoverPause: false,
