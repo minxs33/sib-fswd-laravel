@@ -1,6 +1,6 @@
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500&family=Poppins:wght@400;500;600&display=swap');
 
 *{
     box-sizing: border-box;
@@ -10,5 +10,101 @@
 
 body{
     background-color: rgb(238, 238, 238);
-    margin: 0 0 82px 0;
+    /* margin: 0 0 82px 0; */
+    font-family: 'Poppins', sans-serif;
+}
+
+.logo-title {
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+.search-button{
+    margin-left: -2.5rem !important;
+}
+
+/* carousels  */
+.owl-stage-outer{
+    border-radius: 6px !important;
+
+}
+.owl-prev {
+    position: absolute !important;
+    font-size: 40px !important;
+    width:20px;
+    height:auto;
+    padding: 2px;
+    top: 40% !important;
+    transition: 0.2s;
+    left: 20px !important;
+    display: block !important;
+}
+
+.owl-next {
+    position: absolute !important;
+    font-size: 40px !important;
+    width:20px;
+    height:auto;
+    top: 40% !important;
+    transition: 0.2s;
+    right: 20px !important;
+    display: block !important;
+}
+.owl-prev, .owl-next {
+    color: white !important;
+}
+.owl-prev:hover, .owl-next:hover {
+    color: #0A3622 !important;
+    background-color: transparent !important;
+    transition: 0.2s;
+    transform: scale(150%);
+}
+
+.owl-dots {
+    position: absolute;
+    text-align: center;
+    bottom: -1.8rem;
+}
+
+.owl-dots button.owl-dot.active span
+{
+  background-color: #0A3622 !important;
+  /* border-radius: 50% !important; */
+}
+
+.owl-dots button.owl-dot:hover span {
+    background-color: #198754 !important;
+}
+.owl-dots button.owl-dot{
+    margin-bottom: 2rem;
+}
+
+.category-carousel .owl-prev, .category-carousel .owl-next {
+    position: absolute !important;
+    color: #198754 !important;
+    background-color: white !important;
+    opacity: 0.8;
+    font-size: 40px !important;
+    width:20px;
+    height:auto;
+    transition: 0.2s;
+    display: block !important;
+    /* border: 2px solid #0A3622 !important; */
+}
+
+.category-carousel .owl-prev:hover, .category-carousel .owl-next:hover {
+    opacity: 1;
+    transition: 0.2s;
+    transform: scale(110%);
+}
+
+.category-carousel .owl-prev {
+    top: 40% !important;
+    transition: 0.2s;
+    left: 0px !important;
+}
+
+.category-carousel .owl-next {
+    top: 40% !important;
+    transition: 0.2s;
+    right: 0 !important;
 }
