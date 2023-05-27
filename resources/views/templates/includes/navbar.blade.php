@@ -4,7 +4,10 @@
             <div class="row">
             <div class="col-lg-3 d-lg-flex d-flex justify-content-lg-center justify-content-between mt-2 mt-lg-0 align-items-center">
                 
-            <a class="navbar-brand logo-title text-success-emphasis d-flex align-items-center" href="{{ url('/') }}"><img src="{{ asset('images/logo-light.png') }}" alt="A Logo" style="width: 45px; height:auto;"> Naufal<span class="text-success">Alwan</span></a>
+            <a class="navbar-brand logo-title text-success-emphasis d-flex align-items-center gap-1" href="{{ url('/') }}">
+                <img src="{{ asset('images/logo-merch-light.png') }}" alt="A Logo" style="width: 65px; height:auto;"> 
+                Naufal<span class="text-success">Alwan</span> <span class="text-dark">Merch</span></a>
+
                 <div class="d-flex justify-content-center align-items-center g-1 d-block d-lg-none">
                         <a href="#" class="p-2 rounded-circle text-success"><i class="fas fa-bag-shopping fs-5"></i></a>
                         <a href="#" class="p-2 rounded-circle text-success"><i class="far fa-user fs-5"></i></a>

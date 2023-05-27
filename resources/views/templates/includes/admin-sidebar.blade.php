@@ -1,7 +1,7 @@
 
     <ul class="navbar-nav sidebar sidebar-success accordion toggled" id="accordionSidebar">
 
-    <a class="sidebar-brand align-items-center justify-content-center mb-1 text-success-emphasis" href="{{ url('/') }}"><img src="{{ asset('images/logo-light.png') }}" alt="A Logo" style="width: 45px; height:auto;"></a>
+    <a class="sidebar-brand align-items-center justify-content-center mb-1 text-success-emphasis" href="{{ url('/') }}"><img src="{{ asset('images/logo-merch-light.png') }}" alt="A Logo" style="width: 65px; height:auto;"></a>
 
         <hr class="sidebar-divider mb-4">
         <li class="nav-item">
