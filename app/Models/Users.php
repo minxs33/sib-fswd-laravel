@@ -14,9 +14,10 @@ class Users extends Model
     protected $fillable = [
         'email',
         'name',
+        'avatar',
+        'email',
         'password',
-        'role',
-        'address'
+        'role'
     ];
 
     protected $hidden = [
@@ -24,4 +25,12 @@ class Users extends Model
     ];
 
     protected $primaryKey = 'id';
+    
+    function roles(){
+		return $this->belongsTo('App\Roles');
+	}
+
+    function products(){
+        return $this->hasMany('App\Products');
+    }
 }
