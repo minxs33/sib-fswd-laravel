@@ -1,6 +1,6 @@
 @extends('templates/admin-app')
 
-@section('title','Naufal Alwan - Admin')
+@section('title','NAM - Dashboard')
 
 @section('content')
 <!-- Begin Page Content -->

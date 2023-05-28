@@ -16,16 +16,16 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments("id");
             $table->integer("category_id")->unsigned();
-            $table->integer("created_by")->unsigned();
+            $table->integer("created_by")->unsigned()->default(1);
             $table->string("name",100);
             $table->text("description");
             $table->double("price",50);
-            $table->enum("status",["waiting, accepted"]);
+            $table->enum("status",["waiting", "accepted"])->default("waiting");
             $table->smallInteger("stock");
             $table->timestamps();
 
             $table->foreign("category_id")->references("id")->on("categories")->onUpdate("cascade")->onDelete("restrict");
-            $table->foreign("created_by")->references("id")->on("users")->onUpdate("cascade")->onDelete("restrict")->default(1);
+            $table->foreign("created_by")->references("id")->on("users")->onUpdate("cascade")->onDelete("restrict");
         });
     }
 

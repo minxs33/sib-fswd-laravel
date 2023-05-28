@@ -11,7 +11,7 @@
     <!-- Custom fonts for this template-->
 
     <link href="{{asset ('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">  
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css" />
     <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
@@ -22,30 +22,26 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
     <div id="wrapper">
     @include("templates.includes.admin-sidebar")
     <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
     <div id="content">
 
     @include("templates.includes.admin-navbar")
 
     @yield('content')
+    </div>
 
     @include("templates.includes.admin-footer")
 
-</div>
-<!-- End of Content Wrapper -->
 
 </div>
-<!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
+    </div>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->

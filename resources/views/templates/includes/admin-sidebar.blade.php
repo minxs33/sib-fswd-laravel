@@ -5,7 +5,7 @@
 
         <hr class="sidebar-divider mb-4">
         <li class="nav-item">
-            <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/dashboard') }}">
                 <i class="fas fa-chart-line"></i>
                 <span>Dashboard</span>
             </a>
@@ -17,7 +17,7 @@
         </div>
 
         <li class="nav-item">
-            <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/products') }}">
                 <i class="fas fa-boxes-stacked"></i>
                 <span>Product Lists</span>
             </a>

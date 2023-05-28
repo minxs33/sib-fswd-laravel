@@ -18,6 +18,12 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index');
 });
 
-Route::controller(AdminController::class)->group(function() {
-    Route::get('/dashboard', 'index');
+Route::group(["prefix"=>"admin"], function(){
+
+    Route::get("/dashboard",["uses" => "AdminController@index"]);
+
+    Route::resources([
+        "products" => ProductController::class,
+    ]);
+
 });
