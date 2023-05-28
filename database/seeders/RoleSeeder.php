@@ -16,12 +16,13 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $faker = FakerFactory::create();
+        $roles = ['admin','staff'];
 
-        for ($i = 0; $i < 5; $i++) {
+        foreach ($roles as $role){
             Roles::create([
-                'role_name' => $faker->word,
+                "role_name" => $role,
             ]);
         }
+
     }
 }

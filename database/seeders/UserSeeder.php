@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
 
         for ($i = 0; $i < 10; $i++) {
             Users::create([
-                'role' => $faker->numberBetween(1, 5),
+                'role' => $faker->numberBetween(1, 2),
                 'avatar' => 'default.jpg',
                 'name' => $faker->name,
                 'email' => $faker->unique()->safeEmail,

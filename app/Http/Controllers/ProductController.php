@@ -53,7 +53,7 @@ class ProductController extends Controller
 
         Products::insert($request->except(['_token']));
 
-        // return redirect(url("admin/products"));
+        return redirect(url("admin/products"));
     }
 
     /**
