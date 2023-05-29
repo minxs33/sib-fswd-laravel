@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class product_images extends Model
+class Product_images extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,6 @@ class product_images extends Model
     protected $fillable = [
         "products_id",
         "image_url",
-        "is_active"
     ];
 
     protected $primaryKey = "id";

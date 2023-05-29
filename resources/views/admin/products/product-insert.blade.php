@@ -8,7 +8,7 @@
 <span>
     <a class="text-success" href="{{url('admin/products')}}"><i class="fas fa-chevron-left"></i> Back</a>
 </span>
-<form class="border border-light px-4 py-3 row" action="{{ url('admin/products') }}" method="POST">
+<form class="border border-light px-4 py-3 row" action="{{ url('admin/products') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
         <h3 class="h3 mb-0 text-base fw-bold">Add Product</h3>
@@ -49,7 +49,7 @@
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Product Photos</label>
             <div class="alert alert-info">Choose how many photos your product needs. First photo is the product thumbnail.</div>
-            <select class="form-select _photoCount">
+            <select class="form-select photoCount">
                     <option selected value="1">1 photo</option>
                     <option value="2">2 photos</option>
                     <option value="3">3 photos</option>
@@ -75,5 +75,24 @@
 </form>
 
 </div>
+
+<script type="text/javascript">
+    jQuery(() => {
+        let photoCount = $(".photoCount");
+        let photos = $(".photos");
+
+        photoCount.on('change',function(){
+            // alert($((this)).val());
+            photos.html("");
+            for(var i = 1; i <= $((this)).val(); i++)
+            {
+                photos.append(`
+                <label for="formFile" class="form-label">Photo `+i+` </label>
+                <input class="form-control mb-2" name="image_`+i+`" type="file" id="formFile">
+                `)
+            }
+        })
+    })
+</script>
 
 @endsection

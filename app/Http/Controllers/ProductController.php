@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
-
+use App\Models\Product_images;
 use Illuminate\Http\Request;
 use App\Models\Products;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -43,15 +44,45 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+
+        $validate_list = [
             "category_id" => "required",
             "name" => "required",
             "description" => "required",
             "price" => "required",
             "stock" => "required"
-        ]);
+        ];
 
-        Products::insert($request->except(['_token']));
+        
+        $product = new Products();
+        $product->category_id = $request->category_id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->save();
+
+        $imageFields = ["image_1", "image_2", "image_3", "image_4", "image_5"];
+        // dd($request);
+        foreach ($imageFields as $field) {
+            if ($request->file($field)) {
+                $validate_list = [
+                    $field => "image|mimes:png,jpg,jpeg|max:2048",
+                ];
+        
+                $this->validate($request,$validate_list);
+        
+                $uploadedFile = $request->file($field);
+                $name = time().'-'.$uploadedFile->getClientOriginalName();
+                Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
+        
+                Product_images::insert([
+                    "products_id" => $product->id,
+                    "image_url" => $name,
+                    "is_active" => 0
+                ]);
+            }
+        }
 
         return redirect(url("admin/products"));
     }
