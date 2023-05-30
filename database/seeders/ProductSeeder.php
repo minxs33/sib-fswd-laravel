@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'name' => $faker->word,
                 'description' => $faker->sentence,
                 'price' => $faker->randomFloat(2, 10, 100),
-                'status' => $faker->randomElement(['waiting', 'accepted']),
+                'status' => $faker->randomElement(['active', 'non-active']),
                 'stock' => $faker->randomNumber(2),
             ]);
         }

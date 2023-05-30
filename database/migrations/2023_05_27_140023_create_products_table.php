@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string("name",100);
             $table->text("description");
             $table->double("price",50);
-            $table->enum("status",["waiting", "accepted"])->default("waiting");
+            $table->enum("status",["active", "non-active"])->default("non-active");
             $table->smallInteger("stock");
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
 
             $table->foreign("category_id")->references("id")->on("categories")->onUpdate("cascade")->onDelete("restrict");
             $table->foreign("created_by")->references("id")->on("users")->onUpdate("cascade")->onDelete("restrict");

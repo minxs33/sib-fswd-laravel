@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string("url",100);
             $table->string("image_url",100);
             $table->boolean("is_active")->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });
     }
 

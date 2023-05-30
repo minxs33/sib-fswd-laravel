@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->get(["*", "categories.name as cat_name", "products.name as prod_name","users.name as users_name"]);
+        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->orderBy("prod_id","ASC")->get(["*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"]);
         return view("admin/products/product-list", array(
             "products" => $products
         ));
@@ -53,7 +53,6 @@ class ProductController extends Controller
             "stock" => "required"
         ];
 
-        
         $product = new Products();
         $product->category_id = $request->category_id;
         $product->name = $request->name;
@@ -62,7 +61,12 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->save();
 
-        $imageFields = ["image_1", "image_2", "image_3", "image_4", "image_5"];
+        $imageFields = [];
+
+        for ($i = 1; $i <= $request->photo_count; $i++) {
+            $imageFields[] = "image_".$i;
+        }
+
         // dd($request);
         foreach ($imageFields as $field) {
             if ($request->file($field)) {
@@ -95,7 +99,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Products::where("id", $id)->first(['status']);
+        echo $product;
     }
 
     /**
@@ -130,5 +135,23 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getStatus(Request $request)
+    {
+        $id = $request->id;
+        $product = Products::where("id", $id)->first(['status']);
+        
+        if ($product) {
+            if ($product['status'] == "active") {
+                Products::where("id",$id)->update(["status" => "non-active"]);
+            } else {
+                Products::where("id",$id)->update(["status" => "active"]);
+            }
+            
+            return response()->json(["message" => "success"]);
+        } else {
+            return response()->json(["message" => "Product not found"], 404);
+        }
     }
 }

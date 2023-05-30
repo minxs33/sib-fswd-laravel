@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer("products_id")->unsigned();
             $table->string("image_url", 100);
             $table->boolean("is_active");
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
 
             $table->foreign("products_id")->references("id")->on("products")->onUpdate("cascade")->onDelete("restrict");
         });

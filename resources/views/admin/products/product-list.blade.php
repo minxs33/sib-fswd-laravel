@@ -13,7 +13,7 @@
         </div>
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-hover text-center rounded">
+                <table class="table table-hover text-center rounded" id="products-table">
                     <thead class="table-success">
                         <tr>
                             <th>No</th>
@@ -22,7 +22,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Stock</th>
-                            <th>Status</th>
+                            <th>Active Status</th>
                             <th>Created At</th>
                             <th>Updated At</th>
                             <th>Created By</th>
@@ -51,7 +51,7 @@
                                     {{$row['stock']}}
                                 </th>
                                 <th>
-                                    {{$row['status']}}
+                                    {!!$row['status'] == 'active' ? '<div class="form-check form-switch"><input class="form-check-input status" type="checkbox" value="'.$row['prod_id'].'" id="flexCheckChecked" checked></div>' : '<div class="form-check form-switch"><input class="form-check-input status" type="checkbox" value="'.$row['prod_id'].'" id="flexCheckChecked"></div>'!!}
                                 </th>
                                 <th>
                                     {{$row['updated_at']->format('j F, Y. H:i')}}
@@ -75,5 +75,28 @@
     </div>
 
 </div>
+
+<script>
+    jQuery(() => {
+        $('#products-table').DataTable();
+
+        let status = $(".status");
+        status.on("change", function(e){
+            e.preventDefault();
+            // alert($((this)).val());
+            $.ajax({
+                url : "{{url('admin/ajaxReq/prod-status')}}",
+                data : {id:$((this)).val()},
+                type: "POST",
+                headers: {
+                    'X-CSRF-Token': '{{ csrf_token() }}',
+                },
+                success : (data) => {
+                    
+                }
+            })
+        })
+    })
+</script>
 
 @endsection

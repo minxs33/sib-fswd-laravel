@@ -108,3 +108,11 @@ body{
     transition: 0.2s;
     right: 0 !important;
 }
+
+/* admin product list */
+.form-check-input[type=checkbox]:checked {
+    background-color: #198754 !important;
+}
+.form-switch .form-check-input:checked[type=checkbox]:after{
+    background-color: #0A3622 !important; 
+}

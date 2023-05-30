@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/logo-merch-light.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -49,6 +50,7 @@
     
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
     <script src="{{ asset('sbadmin2/js/sb-admin-2.min.js') }}"></script>
+    <script src="{{ asset('js/datatables.min.js') }}"></script>
 
 </body>
 

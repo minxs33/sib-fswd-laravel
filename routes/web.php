@@ -22,6 +22,8 @@ Route::group(["prefix"=>"admin"], function(){
 
     Route::get("/dashboard",["uses" => "AdminController@index"]);
 
+    Route::post("/ajaxReq/prod-status",["uses" => "productController@getStatus"]);
+
     Route::resources([
         "products" => ProductController::class,
     ]);

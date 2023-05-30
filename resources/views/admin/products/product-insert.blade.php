@@ -47,19 +47,25 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Product Photos</label>
-            <div class="alert alert-info">Choose how many photos your product needs. First photo is the product thumbnail.</div>
-            <select class="form-select photoCount">
-                    <option selected value="1">1 photo</option>
-                    <option value="2">2 photos</option>
-                    <option value="3">3 photos</option>
-                    <option value="4">4 photos</option>
-                    <option value="5">5 photos</option>
+            <label class="form-label" for="textAreaExample">Product Images</label>
+            <div class="alert alert-info">Choose how many Images your product needs. The first image is the product thumbnail.</div>
+            <select class="form-select photoCount" name="image_count">
+                    <option selected value="1">1 Image</option>
+                    <option value="2">2 Images</option>
+                    <option value="3">3 Images</option>
+                    <option value="4">4 Images</option>
+                    <option value="5">5 Images</option>
+                    <option value="6">6 Images</option>
+                    <option value="7">7 Images</option>
+                    <option value="8">8 Images</option>
+                    <option value="9">9 Images</option>
+                    <option value="10">10 Images</option>
+
             </select>
         </div>
 
         <div class="mb-4 photos">
-            <label for="formFile" class="form-label">Photo 1</label>
+            <label for="formFile" class="form-label">Image 1</label>
             <input class="form-control" name="image_1" type="file" id="formFile">
         </div>
 
@@ -78,6 +84,7 @@
 
 <script type="text/javascript">
     jQuery(() => {
+        
         let photoCount = $(".photoCount");
         let photos = $(".photos");
 
@@ -87,7 +94,7 @@
             for(var i = 1; i <= $((this)).val(); i++)
             {
                 photos.append(`
-                <label for="formFile" class="form-label">Photo `+i+` </label>
+                <label for="formFile" class="form-label">Image `+i+` </label>
                 <input class="form-control mb-2" name="image_`+i+`" type="file" id="formFile">
                 `)
             }
