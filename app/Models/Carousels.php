@@ -16,6 +16,8 @@ class Carousels extends Model
         'url',
         'banner',
         'is_active',
+        'created_at',
+        'updated_at'
     ];
 
     protected $primaryKey = 'id';

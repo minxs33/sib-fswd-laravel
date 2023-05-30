@@ -63,12 +63,13 @@ class ProductController extends Controller
 
         $imageFields = [];
 
-        for ($i = 1; $i <= $request->photo_count; $i++) {
+        for ($i = 1; $i <= $request->image_count; $i++) {
             $imageFields[] = "image_".$i;
         }
 
         // dd($request);
         foreach ($imageFields as $field) {
+            echo $field;
             if ($request->file($field)) {
                 $validate_list = [
                     $field => "image|mimes:png,jpg,jpeg|max:2048",

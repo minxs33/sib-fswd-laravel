@@ -12,7 +12,10 @@ class Categories extends Model
     protected $table = "categories";
 
     protected $fillable = [
-        'name'
+        'name',
+        'created_at',
+        'updated_at'
+        
     ];
 
     protected $primaryKey = "id";

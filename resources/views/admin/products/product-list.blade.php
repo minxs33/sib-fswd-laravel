@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container card bg-white shadow-sm p-4">
+<div class="container-fluid card bg-white shadow-sm p-4">
     <h4 class="fw-semibold"><i class="fas fa-boxes-stacked"></i> Manage Products</h4>
     <hr class="border-success">
     <div class="row">
@@ -24,7 +24,7 @@
                             <th>Stock</th>
                             <th>Active Status</th>
                             <th>Created At</th>
-                            <th>Updated At</th>
+                            <th>Last Updated</th>
                             <th>Created By</th>
                             <th>Action</th>
                         </tr>
