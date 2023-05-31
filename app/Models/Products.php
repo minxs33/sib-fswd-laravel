@@ -17,6 +17,8 @@ class Products extends Model
         'name',
         'description',
         'price',
+        'discount',
+        'total_price',
         'stock',
         'created_at',
         'updated_at'
@@ -25,15 +27,15 @@ class Products extends Model
     protected $primaryKey = "id";
 
     function categories(){
-		return $this->belongsTo('App\Categories');
+		return $this->belongsTo('App\Models\Categories');
 	}
 
     function users(){
-        return $this->belongsTo("App\Users");
+        return $this->belongsTo("App\Models\Users");
     }
 
     function product_images(){
-        return $this->hasMany("App\Product_images");
+        return $this->hasMany("App\Models\Product_images");
     }
 
 }

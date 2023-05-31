@@ -17,7 +17,7 @@
 
     <div class="mb-3">
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Category</label>
+            <label class="form-label" for="textAreaExample">Category<span class="text-danger">*</span></label>
             <select name="category_id" class="form-select">
                     <option disabled selected>Choose a category</option>
                 @foreach($categories as $row)
@@ -27,22 +27,28 @@
         </div>    
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Name</label>
+            <label class="form-label" for="textAreaExample">Name<span class="text-danger">*</span>
+            </label>
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="name">
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Description</label>
+            <label class="form-label" for="textAreaExample">Description<span class="text-danger">*</span></label>
             <textarea id="defaultSubscriptionFormPassword" class="form-control" name="description"></textarea>
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Price (Rp)</label>
+            <label class="form-label" for="textAreaExample">Price (Rp)<span class="text-danger">*</span></label>
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="price">
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Stock</label>
+            <label class="form-label" for="textAreaExample">Discount (%)</label>
+            <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="discount">
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label" for="textAreaExample">Stock<span class="text-danger">*</span></label>
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="stock">
         </div>
 

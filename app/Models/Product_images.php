@@ -21,6 +21,6 @@ class Product_images extends Model
     protected $primaryKey = "id";
 
     function products(){
-        return $this->belongsTo('App\Products');
+        return $this->belongsTo('App\Models\Products');
     }
 }

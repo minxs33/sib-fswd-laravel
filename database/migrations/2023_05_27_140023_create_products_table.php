@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string("name",100);
             $table->text("description");
             $table->double("price",50);
+            $table->smallInteger("discount")->nullable();
+            $table->double("total_price");
             $table->enum("status",["active", "non-active"])->default("non-active");
             $table->smallInteger("stock");
             $table->timestamp('created_at')->useCurrent();

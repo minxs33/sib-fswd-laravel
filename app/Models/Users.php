@@ -29,10 +29,10 @@ class Users extends Model
     protected $primaryKey = 'id';
     
     function roles(){
-		return $this->belongsTo('App\Roles');
+		return $this->belongsTo('App\Models\Roles');
 	}
 
     function products(){
-        return $this->hasMany('App\Products');
+        return $this->hasMany('App\Models\Products');
     }
 }

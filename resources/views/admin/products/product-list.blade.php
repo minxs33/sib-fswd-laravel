@@ -50,7 +50,14 @@
                                     {{substr($row['description'],0,50)}}
                                 </td>
                                 <td>
-                                    Rp{{$row['price']}}
+                                    @if($row['discount'] != null)
+                                        Rp{{$row['total_price']}}
+                                        <div class="badge badge-danger">{{$row['discount']}}%</div>
+                                        <div class="text-decoration-line-through">Rp{{$row['price']}}</div>
+                                    @else
+                                    Rp{{$row['total_price']}}
+                                    @endif
+                                    
                                 </td>
                                 <td>
                                     {{$row['stock']}}
@@ -69,7 +76,11 @@
                                 </td>
                                 <td>
                                     <a class="btn btn-warning btn-sm" href="#"><i class="fas fa-edit fa-sm"></i></a>
-                                    <a class="btn btn-danger btn-sm" href="#"><i class="fas fa-trash fa-sm"></i></a>
+                                    <form method="POST" onsubmit="return confirm('This action will also delete the product images. Are you sure? ');" action="{{ url('admin/products/'.$row['prod_id']) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
@@ -111,19 +122,18 @@
     jQuery(() => {
         $('#products-table').DataTable();
 
-        let status = $(".status");
-        status.on("change", function(e){
-            e.preventDefault();
+        $(document).on("change", ".status",function(){
+   
             // alert($((this)).val());
             $.ajax({
                 url : "{{url('admin/ajaxReq/change-product-status')}}",
-                data : {id:$((this)).val()},
                 type: "POST",
+                data : {id:$((this)).val()},
                 headers: {
                     'X-CSRF-Token': '{{ csrf_token() }}',
                 },
                 success : (data) => {
-                    // console.log(data);
+                    console.log(data);
                 }
             })
         })
@@ -140,7 +150,7 @@
                     'X-CSRF-Token': '{{ csrf_token() }}',
                 },
                 success : (data) => {
-                    console.log(data);
+                    // console.log(data);
                     linkContainer.html(`<a class="btn btn-outline-success" href="{{ url('/admin/product_images/create/${$id}') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new product image</a>`);
                     $.each(data, (i,v) => {
                         
@@ -168,7 +178,7 @@
 
         $(document).on("change", ".image-status",function(){
             $.ajax({
-                url : "{{url('admin/ajaxReq/change-images-status')}}",
+                url : "{{url('admin/ajaxReq/change-images-status/')}}",
                 data : {id:$((this)).val()},
                 type: "POST",
                 headers: {
@@ -181,21 +191,26 @@
         })
 
         $(document).on("click", ".delete-image",function(){
-            console.log($((this)).val())
-            $.ajax({
-                url : "{{url('admin/product_images/destroy')}}/"+$((this)).val(),
-                type: "POST",
-                headers: {
-                    'X-CSRF-Token': '{{ csrf_token() }}',
-                },
-                success : (data) => {
-                    // console.log(data);
-                    // alert($(this).attr("data-prod-id"));
-                    reloadImage($(this).attr("data-prod-id"));
-                }
-            })
+            // console.log($((this)).val())
+            if(confirm("Are you sure?") == true)
+            {
+                $.ajax({
+                    url : "{{url('admin/product_images')}}/"+$((this)).val(),
+                    type: "DELETE",
+                    headers: {
+                        'X-CSRF-Token': '{{ csrf_token() }}',
+                    },
+                    success : (data) => {
+                        // console.log(data);
+                        // alert($(this).attr("data-prod-id"));
+                        reloadImage($(this).attr("data-prod-id"));
+                    }
+                })
+            }
         })
     })
+
+    
 </script>
 
 @endsection

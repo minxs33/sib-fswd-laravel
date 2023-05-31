@@ -21,6 +21,6 @@ class Categories extends Model
     protected $primaryKey = "id";
 
     function products(){
-        return $this->hasMany('App\Products');
+        return $this->hasMany('App\Models\Products');
     }
 }

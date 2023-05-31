@@ -33,7 +33,7 @@ Route::group(["prefix"=>"admin"], function(){
     ]);
 
     Route::get("/product_images/create/{id}",["uses" =>"Product_imageController@create"]);
-    Route::post("/product_images/destroy/{id}",["uses" =>"Product_imageController@destroy"]);
+    // Route::post("/product_images/destroy/{id}",["uses" =>"Product_imageController@destroy"]);
     
     Route::group(["prefix"=>"/ajaxReq"], function(){
         Route::post("/change-product-status",["uses" => "ProductController@getStatus"]);

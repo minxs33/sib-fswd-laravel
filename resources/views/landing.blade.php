@@ -14,31 +14,30 @@
     <section class="mb-5" id="kategori">
         <div class="d-flex flex-column gap-2">
             <div class="d-flex justify-content-between">
-                <h5 class="fw-semibold">New in Category 1</h5>
+                <h5 class="fw-semibold">New in T-Shirt</h5>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
 
-            @foreach($category_1 as $row)
+            @foreach($tshirt as $row)
             <a href="#" class="text-decoration-none">
                 <div class="shadow-sm card border-0" style=" height:25rem">
-                    <img src="{{ $row['image_url'] }}" class="card-img-top object-fit-cover" alt="{{ $row['name'] }}" style="width:100%; height: 240px;">
+                @foreach($row['product_images'] as $images)
+                    @if($images['is_active'] == 1)
+                    <img src="{{asset('storage/images/product-images')}}/{{$images['image_url']}}" class="card-img-top object-fit-cover" alt="{{ $images['name'] }}" style="width:100%; height: 240px;">
+                    @break
+                    @endif
+                @endforeach
                     <div class="card-body p-2">
-                        <small class="card-title text-muted">{{ $row['name'] }}</small>
+                        <small class="card-title text-muted">{{ $row['prod_name'] }}</small>
                         <div class="d-flex flex-column mt-1">
-                            <label class="fw-semibold">Rp 
-                            @php
-                                $discount = ($row['price'] / 100) * $row['discount'];
-                                $price = $row['price'] - $discount;
-                                echo intval(preg_replace('/[^\d.]/', '', $price));
-                            @endphp
-
+                            <label class="fw-semibold">Rp{{$row['total_price']}}
                             </label>
                             @if($row['discount'] == 0)
                             @else
                             <div class="span d-flex gap-2">
                                 <div class="badge badge-sm text-bg-danger">{{$row['discount']}}%</div>
-                                <div class="small text-decoration-line-through">Rp {{$row['price']}}</div>
+                                <div class="small text-decoration-line-through">Rp{{$row['price']}}</div>
                             </div>
                             @endif
                         </div>
@@ -52,36 +51,37 @@
 
         <div class="d-flex flex-column gap-2 mt-4">
             <div class="d-flex justify-content-between">
-                <h5 class="fw-semibold">New in Category 2</h5>
+                <h5 class="fw-semibold">New in Hoodie</h5>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
 
-            @foreach($category_2 as $row)
-                <div class="shadow-sm card border-0" style=" height:25rem">
-                    <img src="{{ $row['image_url'] }}" class="card-img-top object-fit-cover" alt="{{ $row['name'] }}" style="width:100%; height: 240px;">
-                    <div class="card-body p-2">
-                        <small class="card-title text-muted">{{ $row['name'] }}</small>
-                        <div class="d-flex flex-column mt-1">
-                            <label class="fw-semibold">Rp 
-                            @php
-                                $discount = ($row['price'] / 100) * $row['discount'];
-                                $price = $row['price'] - $discount;
-                                echo intval(preg_replace('/[^\d.]/', '', $price));
-                            @endphp
-
-                            </label>
-                            @if($row['discount'] == 0)
-                            @else
-                            <div class="span d-flex gap-2">
-                                <div class="badge badge-sm text-bg-danger">{{$row['discount']}}%</div>
-                                <div class="small text-decoration-line-through">Rp {{$row['price']}}</div>
+            @foreach($hoodie as $row)
+                <a href="#" class="text-decoration-none">
+                    <div class="shadow-sm card border-0" style=" height:25rem">
+                    @foreach($row['product_images'] as $images)
+                        @if($images['is_active'] == 1)
+                        <img src="{{asset('storage/images/product-images')}}/{{$images['image_url']}}" class="card-img-top object-fit-cover" alt="{{ $images['name'] }}" style="width:100%; height: 240px;">
+                        @break
+                        @endif
+                    @endforeach
+                        <div class="card-body p-2">
+                            <small class="card-title text-muted">{{ $row['prod_name'] }}</small>
+                            <div class="d-flex flex-column mt-1">
+                                <label class="fw-semibold">Rp{{$row['total_price']}}
+                                </label>
+                                @if($row['discount'] == 0)
+                                @else
+                                <div class="span d-flex gap-2">
+                                    <div class="badge badge-sm text-bg-danger">{{$row['discount']}}%</div>
+                                    <div class="small text-decoration-line-through">Rp{{$row['price']}}</div>
+                                </div>
+                                @endif
                             </div>
-                            @endif
                         </div>
                     </div>
-                </div>
-                @endforeach
+                </a>
+            @endforeach
             </div>
         </div>
     </section>

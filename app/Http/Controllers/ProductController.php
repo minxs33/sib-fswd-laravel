@@ -50,7 +50,8 @@ class ProductController extends Controller
             "name" => "required",
             "description" => "required",
             "price" => "required",
-            "stock" => "required"
+            "stock" => "required",
+            "discount" => "required"
         ];
 
         $product = new Products();
@@ -58,6 +59,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->total_price = $request->price - (($request->price / 100) * $request->discount);
         $product->stock = $request->stock;
         $product->save();
 
@@ -100,8 +103,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Products::where("id", $id)->first(['status']);
-        echo $product;
+        $product = Products::find(($id));
     }
 
     /**
@@ -135,7 +137,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product_images = Product_images::where("products_id",$id)->get();
+        foreach($product_images as $row){
+            Storage::delete("public/images/product-images/".$row['image_url']);
+        }
+        Product_images::where("products_id",$id)->delete();
+        Products::find($id)->delete();
+
+        return redirect(url("admin/products"));
     }
 
     public function getStatus(Request $request)
