@@ -15,7 +15,7 @@
     </div>
     <hr>
 
-    <div class="col-12 mb-3">
+    <div class="mb-3">
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Category</label>
             <select name="category_id" class="form-select">
@@ -48,7 +48,7 @@
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Product Images</label>
-            <div class="alert alert-info">Choose how many Images your product needs. The first image is the product thumbnail.</div>
+            <div class="alert alert-info">You can manage product images in the product table in the image column with <i class="fas fa-image small"></i> icon as an indicator.</div>
             <select class="form-select photoCount" name="image_count">
                     <option selected value="1">1 Image</option>
                     <option value="2">2 Images</option>

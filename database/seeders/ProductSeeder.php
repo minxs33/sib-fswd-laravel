@@ -27,7 +27,7 @@ class ProductSeeder extends Seeder
                 'created_by' => $created_by,
                 'name' => $faker->word,
                 'description' => $faker->sentence,
-                'price' => $faker->randomFloat(2, 10, 100),
+                'price' => $faker->randomNumber(4,5),
                 'status' => $faker->randomElement(['active', 'non-active']),
                 'stock' => $faker->randomNumber(2),
             ]);

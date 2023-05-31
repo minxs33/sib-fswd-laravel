@@ -20,12 +20,24 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::group(["prefix"=>"admin"], function(){
 
+    
     Route::get("/dashboard",["uses" => "AdminController@index"]);
-
-    Route::post("/ajaxReq/prod-status",["uses" => "productController@getStatus"]);
-
+    
+    
     Route::resources([
         "products" => ProductController::class,
     ]);
 
+    Route::resources([
+        "product_images" => Product_imageController::class,
+    ]);
+
+    Route::get("/product_images/create/{id}",["uses" =>"Product_imageController@create"]);
+    Route::post("/product_images/destroy/{id}",["uses" =>"Product_imageController@destroy"]);
+    
+    Route::group(["prefix"=>"/ajaxReq"], function(){
+        Route::post("/change-product-status",["uses" => "ProductController@getStatus"]);
+        Route::post("/product-image-list",["uses" => "Product_imageController@getProductImage"]);
+        Route::post("/change-images-status",["uses" => "Product_imageController@updateIsActive"]);
+    });
 });
