@@ -16,11 +16,14 @@
 
             <div class="dropdown">
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black text-decoration-none" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img class="img rounded-circle" style="width:35px" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"> &nbsp; Admin &nbsp; <i class="fas fa-chevron-down fa-sm"></i>
+                    <img class="img rounded-circle" style="width:35px" src="{{asset('storage/images/avatar')}}/{{Auth::user()->avatar}}"> &nbsp; {{Auth::user()->name}} &nbsp; <i class="fas fa-chevron-down fa-sm"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                     <li>
-                        <a class="dropdown-item" href="{{ url('admin/logout') }}">Logout</a>
+                        <form action="{{ url('logout') }}" method="post">
+                            @csrf
+                            <button class="dropdown-item" type="submit">Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>

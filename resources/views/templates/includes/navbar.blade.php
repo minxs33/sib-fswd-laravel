@@ -10,7 +10,7 @@
 
                 <div class="d-flex justify-content-center align-items-center g-1 d-block d-lg-none">
                         <a href="#" class="p-2 rounded-circle text-success"><i class="fas fa-bag-shopping fs-5"></i></a>
-                        <a href="#" class="p-2 rounded-circle text-success"><i class="far fa-user fs-5"></i></a>
+                        <a href="{{url('login')}}" class="p-2 rounded-circle text-success"><i class="far fa-user fs-5"></i></a>
                 </div>
             </div>
                 <div class="col-lg-6 py-2">
@@ -33,19 +33,12 @@
                     </div>
                 </div>
                 <div class="col-lg-3 py-3 d-lg-flex justify-content-center align-items-center d-sm-none">
-                    <!-- <nav class="py-3 d-flex">
-                        <ul class="nav ms-auto">
-                            <li class="nav-item"><a href="{{ url('/') }}/#home" class="nav-link px-2 link-color">Home</a></li>
-                            <li class="nav-item"><a href="{{ url('/search-tags')}}" class="nav-link px-2 link-color">Book Listings</a></li>
-                            <li class="nav-item"><a href="{{ url('/about') }}" class="nav-link px-2 link-color">About</a></li>
-                        </ul>
-                    </nav> -->
                     <div class="d-flex justify-content-center align-items-center gap-2">
                         <a href="#" class="text-success"><i class="fas fa-cart-shopping fs-6"></i></a>
                         <span class="text-success">|</span>
                         <div>
-                        <a href="#" class="btn py-1 btn-sm btn-success text-decoration-none">Login</a>
-                        <a href="#" class="btn py-1 btn-sm btn-outline-success text-decoration-none">Sign Up</a>
+                        <a href="{{url('login')}}" class="btn py-1 btn-sm btn-success text-decoration-none">Login</a>
+                        <a href="{{url('register')}}" class="btn py-1 btn-sm btn-outline-success text-decoration-none">Sign Up</a>
                         </div>
                     </div>
                 </div>
