@@ -30,9 +30,17 @@ class HomeController extends Controller
        
         // $product_tshirt = Products::with("product_images")->where("status","active")->get();
         
-        $product_tshirt = Products::with("product_images")->where("category_id",2)->where("status","active")->get(["*", "products.id as prod_id","products.name as prod_name"]);
+        $product_tshirt = Products::with("product_images")->where("category_id",2)->where("status","active")->withCount([
+            "product_images", 
+            "product_images as product_images_count" => function ($query) {
+                $query->where("is_active", "=", 1);
+            }])->orderBy("products.id","DESC")->limit(12)->get(["*", "products.id as prod_id","products.name as prod_name"]);
         
-        $product_hoodie = Products::with("product_images")->where("category_id",3)->where("status","active")->get(["*", "products.id as prod_id","products.name as prod_name"]);
+        $product_hoodie = Products::with("product_images")->where("category_id",3)->where("status","active")->withCount([
+            "product_images", 
+            "product_images as product_images_count" => function ($query) {
+                $query->where("is_active", "=", 1);
+            }])->orderBy("products.id","DESC")->limit(12)->get(["*", "products.id as prod_id","products.name as prod_name"]);
 
         // dd($product_tshirt->toArray());
         return view("landing", array(

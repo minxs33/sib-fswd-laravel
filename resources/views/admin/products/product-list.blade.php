@@ -41,9 +41,16 @@
                                     {{$row['cat_name']}}
                                 </td>
                                 <td>
-                                    <button class="btn btn-success btn-sm image-modal" type="button" value="{{$row['prod_id']}}" data-mdb-toggle="modal" data-mdb-target="#image-Modal"><i class="fas fa-image fa-sm"></i></button>
+                                    <button class="btn btn-sm btn-success image-modal position-relative" type="button" value="{{$row['prod_id']}}" data-mdb-toggle="modal" data-mdb-target="#image-Modal"><i class="fas fa-image"></i>
+                                    @if($row['product_images_count'] != 0)
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{$row['product_images_count']}}
+                                        <span class="visually-hidden">Product Images</span>
+                                        </span>
+                                    @endif
+                                    </button>
                                 </td>
-                                <td>
+                                <td style="max-width: 250px;">
                                     {{$row['prod_name']}}
                                 </td>
                                 <td>
@@ -75,11 +82,11 @@
                                     {{$row['users_name']}}
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning btn-sm" href="#"><i class="fas fa-edit fa-sm"></i></a>
-                                    <form method="POST" onsubmit="return confirm('This action will also delete the product images. Are you sure? ');" action="{{ url('admin/products/'.$row['prod_id']) }}">
+                                    <form method="POST" action="{{ url('admin/products/'.$row['prod_id']) }}">
+                                        <a class="btn btn-warning btn-sm" href="{{ url('admin/products/'.$row['prod_id'].'/edit') }}"><i class="fas fa-edit fa-sm"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash fa-sm"></i></button>
+                                        <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -164,7 +171,7 @@
                                         <button class="btn btn-danger btn-sm delete-image" type="button" value="${v['id']}" data-prod-id="${v['products_id']}"><i class="fas fa-trash fa-sm"></i></button>
                                     </div>
                                 </div>
-                                <img class="object-fit-scale" src="{{asset('storage/images/product-images')}}/${v['image_url']}" alt="{{asset('storage/images/product-images')}}/${v['image_url']}" style="width:100%; max-height:468px;">
+                                <img class="object-fit-scale" src="{{asset('storage/images/product-images')}}/${v['image_url']}" alt="{{asset('storage/images/product-images')}}/${v['image_url']}" style="width:100%; height:auto;">
                             </div>
                             
                         `);

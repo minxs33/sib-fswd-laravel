@@ -33,7 +33,7 @@
                     <div class="col-lg-6">
                         <div class="d-flex flex-wrap flex-column">
                             <small class="fw-bold text-muted mb-0">Price</small>
-                            <small>Rp{{$products['price']}}</small>
+                            <small>Rp{{$products['total_price']}}</small>
                         </div>
                     </div>
 

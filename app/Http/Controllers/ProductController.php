@@ -17,7 +17,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->orderBy("prod_id","ASC")->get(["*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"]);
+        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->select(["*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"])->orderBy("prod_id","ASC")->withCount("product_images")->get();
+
+        // dd($produ    cts->toArray());
         return view("admin/products/product-list", array(
             "products" => $products
         ));
@@ -62,22 +64,26 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->total_price = $request->price - (($request->price / 100) * $request->discount);
         $product->stock = $request->stock;
+        $product->status = $request->status[0] == "1" ? "active" : "non-active";
         $product->save();
 
         $imageFields = [];
 
         for ($i = 1; $i <= $request->image_count; $i++) {
             $imageFields[] = "image_".$i;
+            $imageStatus [] = "image_status_".$i;
         }
 
         // dd($request);
-        foreach ($imageFields as $field) {
+        foreach ($imageFields as $i => $field) {
             echo $field;
             if ($request->file($field)) {
                 $validate_list = [
                     $field => "image|mimes:png,jpg,jpeg|max:2048",
                 ];
-        
+                
+                $image_status = $imageStatus[$i];
+                
                 $this->validate($request,$validate_list);
         
                 $uploadedFile = $request->file($field);
@@ -87,10 +93,11 @@ class ProductController extends Controller
                 Product_images::insert([
                     "products_id" => $product->id,
                     "image_url" => $name,
-                    "is_active" => 0
+                    "is_active" => $request->$image_status == "1" ? 1 : 0
                 ]);
             }
         }
+
 
         return redirect(url("admin/products"));
     }
@@ -103,7 +110,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Products::find(($id));
+        $product = Products::find($id);
     }
 
     /**
@@ -114,7 +121,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Products::join("categories","products.category_id","=","categories.id")->select(["*", "products.id as prod_id","products.name as prod_name","categories.name as cat_name","categories.id as cat_id"])->find($id);
+        $categories = Categories::all();
+
+        return view("admin/products/product-update", array(
+            "product" => $product,
+            "categories" => $categories
+        ));
     }
 
     /**
@@ -126,7 +139,30 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate_list = [
+            "category_id" => "required",
+            "name" => "required",
+            "description" => "required",
+            "price" => "required",
+            "stock" => "required",
+            "discount" => "required"
+        ];
+
+        $this->validate($request,$validate_list);
+
+        $product = Products::find($id);
+        $product->category_id = $request->category_id;
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->total_price = $request->price - (($request->price / 100) * $request->discount);
+        $product->stock = $request->stock;
+        $product->status = $request->status != null ? "active" : "non-active";
+        $product->update();
+
+        // dd($request);
+        return redirect(url("admin/products"));
     }
 
     /**

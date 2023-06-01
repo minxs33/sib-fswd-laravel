@@ -53,8 +53,16 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="textAreaExample">Product Images</label>
-            <div class="alert alert-info">You can manage product images in the product table in the image column with <i class="fas fa-image small"></i> icon as an indicator.</div>
+            <label class="form-label mb-0" for="textAreaExample">Product Status</label><br>
+            <div class="badge badge-info mb-3" for="textAreaExample">Determines wether or not the product is displayed</div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" name="status[]" value="1" id="flexSwitchCheckChecked">
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label mb-0" for="textAreaExample">Product Images</label><br>
+            <div class="badge badge-info mb-4">Turn on the <i class="fas fa-toggle-on"></i> if you want the image to be show on the product. You can organize the product images in the product table in the image column with <i class="fas fa-image small"></i> icon as an indicator.</div>
             <select class="form-select photoCount" name="image_count">
                     <option selected value="1">1 Image</option>
                     <option value="2">2 Images</option>
@@ -71,7 +79,12 @@
         </div>
 
         <div class="mb-4 photos">
-            <label for="formFile" class="form-label">Image 1</label>
+            <div class="d-flex gap-2">
+                <label for="formFile" class="form-label">Image 1</label>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" name="image_status_1" value="1" id="flexSwitchCheckChecked">
+                </div>
+            </div>
             <input class="form-control" name="image_1" type="file" id="formFile">
         </div>
 
@@ -100,8 +113,13 @@
             for(var i = 1; i <= $((this)).val(); i++)
             {
                 photos.append(`
-                <label for="formFile" class="form-label">Image `+i+` </label>
-                <input class="form-control mb-2" name="image_`+i+`" type="file" id="formFile">
+                <div class="d-flex gap-2">
+                    <label for="formFile" class="form-label">Image ${i}</label>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="image_status_${i}" value="1" id="flexSwitchCheckChecked">
+                    </div>
+                </div>
+                <input class="form-control mb-2" name="image_${i}" type="file" id="formFile">
                 `)
             }
         })
