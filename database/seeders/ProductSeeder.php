@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
   
         for ($i = 0; $i < 10; $i++) {
             $category_id = $faker->numberBetween(1, 4);
-            $created_by = $faker->numberBetween(1, 10);
+            $created_by = $faker->numberBetween(1, 3);
             $price = $faker->randomNumber(4,5);
             $discount = $faker->randomFloat(2,0,25);
             $total_price = $price - (($price / 100) * $discount);

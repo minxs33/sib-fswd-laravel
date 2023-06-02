@@ -19,16 +19,40 @@ class UserSeeder extends Seeder
     {
         $faker = FakerFactory::create();
 
-        for ($i = 0; $i < 10; $i++) {
-            Users::create([
-                'role' => $faker->numberBetween(1, 2),
-                'avatar' => 'default.jpg',
-                'name' => $faker->name,
-                'email' => $faker->unique()->safeEmail,
-                'email_verified_at' => now(),
-                'password' => Hash::make('password'),
-                'remember_token' => Str::random(10),
-            ]);
-        }
+        Users::create([
+            'role' => 1,
+            'avatar' => 'default.jpg',
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('admin'),
+        ]);
+        Users::create([
+            'role' => 2,
+            'avatar' => 'default.jpg',
+            'name' => 'staff',
+            'email' => 'staff@staff.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('staff'),
+        ]);
+        Users::create([
+            'role' => 3,
+            'avatar' => 'default.jpg',
+            'name' => 'user',
+            'email' => 'user@user.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('user'),
+        ]);
+
+        // for ($i = 0; $i < 5; $i++) {
+        //     Users::create([
+        //         'role' => $faker->numberBetween(1, 2),
+        //         'avatar' => 'default.jpg',
+        //         'name' => $faker->name,
+        //         'email' => $faker->unique()->safeEmail,
+        //         'email_verified_at' => now(),
+        //         'password' => Hash::make('password')
+        //     ]);
+        // }
     }
 }

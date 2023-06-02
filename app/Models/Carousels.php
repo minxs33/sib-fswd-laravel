@@ -13,6 +13,7 @@ class Carousels extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'url',
         'banner',
         'is_active',

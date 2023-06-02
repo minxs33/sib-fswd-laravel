@@ -7,7 +7,7 @@
 <div class="container-md mt-4">
     <div class="owl-carousel carousel owl-theme mb-5">
         @foreach($carousels as $row)
-            <img src="{{ $row['banner'] }}" alt="http://placehold.it/1200x400/cccccc/999999" class="object-fit-cover carousel-items" style="max-height:430px;">
+            <img src="{{asset('storage/images/carousels')}}/{{$row['image_url']}}" alt="{{$row['image_url']}}" class="object-fit-cover carousel-items" style="max-height:430px;">
         @endforeach
     </div>
 

@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('carousels', function (Blueprint $table) {
             $table->increments("id");
             $table->string("name",100);
+            $table->text("description");
             $table->string("url",100);
             $table->string("image_url",100);
-            $table->boolean("is_active")->default(0);
+            $table->boolean("is_active");
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
         });

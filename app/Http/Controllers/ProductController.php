@@ -87,7 +87,13 @@ class ProductController extends Controller
                 $this->validate($request,$validate_list);
         
                 $uploadedFile = $request->file($field);
+                
                 $name = time().'-'.$uploadedFile->getClientOriginalName();
+                $name = str_replace(' ', '-', $name);
+                $name = str_replace('_', '-', $name);
+                $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+                $name = preg_replace('/-+/', '-', $name);
+
                 Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
         
                 Product_images::insert([

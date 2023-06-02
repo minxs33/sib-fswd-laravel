@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarouselController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,23 +35,23 @@ Route::group(["prefix"=>"admin"], function(){
         Route::resources([
             "products" => ProductController::class,
             "product_images" => Product_imageController::class,
+            "carousels" => CarouselController::class
         ]);
         
         Route::get("/product_images/create/{id}",["uses" =>"Product_imageController@create"]);
         
         Route::group(["prefix"=>"/ajaxReq"], function(){
             Route::post("/change-product-status",["uses" => "ProductController@getStatus"]);
+            Route::post("/change-carousel-status/{id}",["uses" => "ProductController@getStatus"]);
             Route::post("/product-image-list",["uses" => "Product_imageController@getProductImage"]);
             Route::post("/change-images-status",["uses" => "Product_imageController@updateIsActive"]);
         });
 
     });
 
-    Route::middleware("role:2|3")->group(function(){
+    Route::middleware("role:1|2|3")->group(function(){
         Route::get("/products",["uses" => "ProductController@index"]);
     });
-
-    // Route::post("/product_images/destroy/{id}",["uses" =>"Product_imageController@destroy"]);
     
-})->middleware("auth");
+})->middleware('auth');
 
