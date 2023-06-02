@@ -10,25 +10,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 
-    // $users = Users::join("roles", "users.role", "=", "roles.id")->get(["users.*","roles.role_name"]);
-        // return view("pert_22", array(
-        //     "users" => $users
-        // ));
     public function index(){
-        $carousels = Carousels::limit(4)->get();
-       
-        // $product_tshirt = Products::join("categories", "products.category_id", "=", "categories.id")
-        // ->where("category_id", 2)
-        // ->where("status", "active")
-        // ->whereHas("product_images", function ($q) {
-        //     $q->select("id", "image_url");
-        // })
-        // ->with(["product_images" => function ($q) {
-        //     $q->select("id", "image_url");
-        // }])
-        // ->get(["*"]);
-       
-        // $product_tshirt = Products::with("product_images")->where("status","active")->get();
+        $carousels = Carousels::where("is_active",1)->limit(4)->get();
         
         $product_tshirt = Products::with("product_images")->where("category_id",2)->where("status","active")->withCount([
             "product_images", 

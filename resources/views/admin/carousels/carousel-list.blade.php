@@ -3,6 +3,7 @@
 @section('title','NAM - Carousel Lists')
 
 @section('content')
+
 <style>
 .image-btn:hover{
     cursor: pointer;
@@ -12,22 +13,23 @@
 <div class="container-fluid card bg-white shadow-sm p-4">
     <h4 class="fw-semibold"><i class="fas fa-boxes-stacked"></i> Manage Carousels</h4>
     <hr class="border-success">
-    
-    <div class="row">
-        <div class="col-3 mb-4">
-            <a class="btn btn-outline-success" href="{{ url('/admin/carousels/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new carousel</a>
-        </div>
+
         @if (Session::get('error'))
-            <div class="alert alert-danger alert-dismissable fade show">
-                {{Session::get('error')}}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{Session::get('error')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @elseif(Session::get('success'))
-            <div class="alert alert-success alert-dismissable fade show">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{Session::get('success')}}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+    <div class="row">
+        <div class="col-3 mb-4">
+            <a class="btn btn-outline-success" href="{{ url('/admin/carousels/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new carousel</a>
+        </div>
+        
         <div class="col-12">
             <div class="table-responsive">
                 <table class="table table-hover text-center" id="carousels-table">

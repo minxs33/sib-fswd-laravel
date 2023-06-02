@@ -29,14 +29,23 @@
                 @endif
                 <div class="mb-3">
                     <label for="email" class="form-label">Fullname</label>
+                    @if($errors->has('name'))
+                        <div class="text-danger">{{ $errors->first('name') }}</div>
+                    @endif
                     <input type="text" class="form-control" id="name" name="name" placeholder="John Doe">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
+                    @if($errors->has('email'))
+                        <div class="text-danger">{{ $errors->first('email') }}</div>
+                    @endif
                     <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com">
                 </div>
                 <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
+                    @if($errors->has('password'))
+                        <div class="text-danger">{{ $errors->first('password') }}</div>
+                    @endif
                     <div class="input-group">
                         <input type="password" class="form-control border-end-0" id="password" name="password" placeholder="password">
                         <span class="input-group-append">

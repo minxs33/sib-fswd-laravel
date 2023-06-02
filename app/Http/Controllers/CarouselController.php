@@ -40,8 +40,8 @@ class CarouselController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            "name" => "required|max:100",
-            "description" => "required",
+            "name" => "required|min:3|max:100",
+            "description" => "required|min:5",
             "url" => "required|max:100",
             "image_url" => "image|required|mimes:png,jpg,jpeg|max:4096",
         ]);
@@ -110,8 +110,8 @@ class CarouselController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            "name" => "required|max:100",
-            "description" => "required",
+            "name" => "required|min:3|max:100",
+            "description" => "required|min:5",
             "url" => "required|max:100",
             "image_url" => "image|mimes:png,jpg,jpeg|max:4096",
         ]);
@@ -138,7 +138,7 @@ class CarouselController extends Controller
             $carousels->image_url = $name;
         }
         if($carousels->update()){
-            return redirect(url("admin/carousels"))->with('success', 'The carousels with the name '.$carousels->name.' has been succesfully updated!');
+            return redirect(url("admin/carousels"))->with('success', $carousels->name.' has been succesfully updated!');
         }else{
             return redirect(url("admin/carousels"))->with('error', 'Something went wrong, the carousels failed to update!');
         }

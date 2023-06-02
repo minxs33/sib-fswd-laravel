@@ -20,7 +20,7 @@
             <div class="owl-carousel category-carousel owl-theme">
 
             @foreach($tshirt as $row)
-            <a href="#" class="text-decoration-none">
+                <a href="#" class="text-decoration-none">
                     <div class="shadow-sm card border-0" style=" height:25rem">
                     @if($row['product_images_count'] != 0)
                         @foreach($row['product_images'] as $images)

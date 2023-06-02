@@ -43,10 +43,15 @@ Route::group(["prefix"=>"admin"], function(){
         Route::group(["prefix"=>"/ajaxReq"], function(){
             Route::post("/change-product-status",["uses" => "ProductController@getStatus"]);
             Route::post("/change-carousel-status/{id}",["uses" => "ProductController@getStatus"]);
-            Route::post("/product-image-list",["uses" => "Product_imageController@getProductImage"]);
             Route::post("/change-images-status",["uses" => "Product_imageController@updateIsActive"]);
         });
 
+    });
+
+    Route::middleware("role:1|2")->group(function(){
+        Route::group(["prefix"=>"/ajaxReq"], function(){
+            Route::post("/product-image-list",["uses" => "Product_imageController@getProductImage"]);
+        });
     });
 
     Route::middleware("role:1|2|3")->group(function(){
@@ -54,4 +59,3 @@ Route::group(["prefix"=>"admin"], function(){
     });
     
 })->middleware('auth');
-

@@ -55,17 +55,21 @@ class Product_imageController extends Controller
                     $field => "image|mimes:png,jpg,jpeg|max:2048",
                 ];
         
-                $this->validate($request,$validate_list);
+                if($this->validate($request,$validate_list)){
+                    $uploadedFile = $request->file($field);
+                    $name = time().'-'.$uploadedFile->getClientOriginalName();
+                    Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
+            
+                    Product_images::insert([
+                        "products_id" => $request->products_id,
+                        "image_url" => $name,
+                        "is_active" => 0
+                    ]);
+                }else{
+                    return redirect()->back()->with(["error" => "Image validation failed, image must be png, jpg or jpeg and 2mb or less in size"]);
+                }
         
-                $uploadedFile = $request->file($field);
-                $name = time().'-'.$uploadedFile->getClientOriginalName();
-                Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
-        
-                Product_images::insert([
-                    "products_id" => $request->products_id,
-                    "image_url" => $name,
-                    "is_active" => 0
-                ]);
+               
             }
         }
 

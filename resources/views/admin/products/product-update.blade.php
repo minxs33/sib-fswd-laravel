@@ -8,6 +8,12 @@
 <span>
     <a class="text-success" href="{{url('admin/products')}}"><i class="fas fa-chevron-left"></i> Back</a>
 </span>
+@if (Session::get('error'))
+    <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+        {{Session::get('error')}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <form class="border border-light px-4 py-3 row" action="{{ url('admin/products/'.$product['prod_id']) }}" method="POST">
     @csrf
     @method("PUT")
@@ -33,26 +39,41 @@
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Name<span class="text-danger">*</span>
             </label>
+            @if($errors->has('name'))
+                <div class="text-danger">{{ $errors->first('name') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="name" value="{{$product['prod_name']}}">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Description<span class="text-danger">*</span></label>
+            @if($errors->has('description'))
+                <div class="text-danger">{{ $errors->first('description') }}</div>
+            @endif
             <textarea id="defaultSubscriptionFormPassword" class="form-control" name="description">{{$product['description']}}</textarea>
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Price (Rp)<span class="text-danger">*</span></label>
+            @if($errors->has('price'))
+                <div class="text-danger">{{ $errors->first('price') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="price" value="{{$product['price']}}">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Discount (%)</label>
+            @if($errors->has('discount'))
+                <div class="text-danger">{{ $errors->first('discount') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="discount" value="{{$product['discount']}}">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Stock<span class="text-danger">*</span></label>
+            @if($errors->has('stock'))
+                <div class="text-danger">{{ $errors->first('stock') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="stock" value="{{$product['stock']}}">
         </div>
 

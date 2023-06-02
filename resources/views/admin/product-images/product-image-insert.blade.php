@@ -13,6 +13,12 @@
             <h3 class="h3 mb-0 text-base fw-bold">Add Product Images</h3>
         </div>
         <hr>
+        @if (Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+                {{Session::get('error')}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="row">
             <div class="alert alert-info p-3">
                 <div class="row gy-3">

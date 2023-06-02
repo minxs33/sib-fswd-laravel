@@ -1,9 +1,9 @@
 
     <ul class="navbar-nav sidebar sidebar-success accordion toggled" id="accordionSidebar">
 
-    <a class="sidebar-brand align-items-center justify-content-center mb-1 text-success-emphasis" href="{{ url('/') }}"><img src="{{ asset('images/logo-merch-light.png') }}" alt="A Logo" style="width: 65px; height:auto;"></a>
+    <a class="sidebar-brand align-items-center justify-content-center mb-1" href="{{ url('/') }}"><img src="{{ asset('images/logo-merch-light.png') }}" alt="A Logo" style="width: 65px; height:auto;"></a>
 
-        <hr class="sidebar-divider mb-4">
+        @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
         <li class="nav-item">
             <a class="nav-link collapsed text-muted" href="{{ url('admin/dashboard') }}">
                 <i class="fas fa-chart-line"></i>
@@ -11,7 +11,20 @@
             </a>
         </li>
         <hr class="sidebar-divider mb-4">
+        
+        <div class="sidebar-heading">
+            Carousel
+        </div>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/carousels') }}">
+                <i class="fas fa-panorama"></i>
+                <span>Carousel Lists</span>
+            </a>
+        </li>
+
+        <hr class="sidebar-divider d-none d-md-block">
+        @endif
         <div class="sidebar-heading">
             Product
         </div>
@@ -23,6 +36,7 @@
             </a>
         </li>
 
+        @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
         <li class="nav-item">
             <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
                 <i class="fas fa-book"></i>
@@ -30,7 +44,7 @@
             </a>
         </li>
 
-        <hr class="sidebar-divider text-success-emphasis d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block">
 
         <div class="sidebar-heading">
             User
@@ -49,7 +63,7 @@
                 <span>User Lists</span>
             </a>
         </li>
-
+        @endif
 
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0 shadow-sm bg-success text-white" id="sidebarToggle"></button>

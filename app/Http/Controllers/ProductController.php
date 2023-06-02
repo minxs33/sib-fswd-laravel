@@ -7,6 +7,7 @@ use App\Models\Product_images;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -19,10 +20,17 @@ class ProductController extends Controller
     {
         $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->select(["*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"])->orderBy("prod_id","ASC")->withCount("product_images")->get();
 
-        // dd($produ    cts->toArray());
-        return view("admin/products/product-list", array(
-            "products" => $products
-        ));
+        // dd($products->toArray());
+        if(Auth::user()->role == 1 || Auth::user()->role == 2){
+            return view("admin/products/product-list", array(
+                "products" => $products
+            ));
+        }elseif(Auth::user()->role == 3){
+            return view("admin/products/products-catalogue", array(
+                "products" => $products
+            ));
+        }
+        
     }
 
     /**
@@ -47,14 +55,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $validate_list = [
+        $this->validate($request, [
             "category_id" => "required",
-            "name" => "required",
-            "description" => "required",
-            "price" => "required",
-            "stock" => "required",
-            "discount" => "required"
-        ];
+            "name" => "required|min:3|max:100",
+            "description" => "required|min:3",
+            "price" => "required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/",
+            "stock" => "required|integer",
+            "discount" => "integer"
+        ]);
 
         $product = new Products();
         $product->category_id = $request->category_id;
@@ -64,7 +72,7 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->total_price = $request->price - (($request->price / 100) * $request->discount);
         $product->stock = $request->stock;
-        $product->status = $request->status[0] == "1" ? "active" : "non-active";
+        $product->status = $request->status == "1" ? "active" : "non-active";
         $product->save();
 
         $imageFields = [];
@@ -84,23 +92,25 @@ class ProductController extends Controller
                 
                 $image_status = $imageStatus[$i];
                 
-                $this->validate($request,$validate_list);
-        
-                $uploadedFile = $request->file($field);
+                if($this->validate($request,$validate_list)){
+                    $uploadedFile = $request->file($field);
                 
-                $name = time().'-'.$uploadedFile->getClientOriginalName();
-                $name = str_replace(' ', '-', $name);
-                $name = str_replace('_', '-', $name);
-                $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
-                $name = preg_replace('/-+/', '-', $name);
-
-                Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
-        
-                Product_images::insert([
-                    "products_id" => $product->id,
-                    "image_url" => $name,
-                    "is_active" => $request->$image_status == "1" ? 1 : 0
-                ]);
+                    $name = time().'-'.$uploadedFile->getClientOriginalName();
+                    $name = str_replace(' ', '-', $name);
+                    $name = str_replace('_', '-', $name);
+                    $name = preg_replace('/[^A-Za-z0-9\-]/', '', $name);
+                    $name = preg_replace('/-+/', '-', $name);
+    
+                    Storage::putFileAs('public/images/product-images', $uploadedFile, $name);
+            
+                    Product_images::insert([
+                        "products_id" => $product->id,
+                        "image_url" => $name,
+                        "is_active" => $request->$image_status == "1" ? 1 : 0
+                    ]);
+                }else{
+                    return redirect()->back()->with(["error" => "Image validation failed, image must be png, jpg or jpeg and 2mb or less in size"]);
+                }
             }
         }
 
@@ -145,16 +155,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validate_list = [
+        $this->validate($request, [
             "category_id" => "required",
-            "name" => "required",
-            "description" => "required",
-            "price" => "required",
-            "stock" => "required",
-            "discount" => "required"
-        ];
+            "name" => "required|min:3|max:100",
+            "description" => "required|min:3",
+            "price" => "required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/",
+            "stock" => "required|integer",
+            "discount" => "integer"
+        ]);
 
-        $this->validate($request,$validate_list);
 
         $product = Products::find($id);
         $product->category_id = $request->category_id;

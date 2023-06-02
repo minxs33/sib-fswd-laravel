@@ -15,6 +15,12 @@
         <h3 class="h3 mb-0 text-base fw-bold">Update Carousel</h3>
     </div>
     <hr>
+    @if (Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            {{Session::get('error')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="mb-4">
         <div class="d-flex gap-2 align-text-center">
             <label class="form-label" for="textAreaExample">Name<span class="text-danger">*</span>

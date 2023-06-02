@@ -14,10 +14,18 @@
         <h3 class="h3 mb-0 text-base fw-bold">Add Product</h3>
     </div>
     <hr>
-
+    @if (Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show mb-3" role="alert">
+            {{Session::get('error')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="mb-3">
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Category<span class="text-danger">*</span></label>
+            @if($errors->has('category_id'))
+                <div class="text-danger">{{ $errors->first('category_id') }}</div>
+            @endif
             <select name="category_id" class="form-select">
                     <option disabled selected>Choose a category</option>
                 @foreach($categories as $row)
@@ -29,26 +37,41 @@
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Name<span class="text-danger">*</span>
             </label>
+            @if($errors->has('name'))
+                <div class="text-danger">{{ $errors->first('name') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="name">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Description<span class="text-danger">*</span></label>
+            @if($errors->has('description'))
+                <div class="text-danger">{{ $errors->first('description') }}</div>
+            @endif
             <textarea id="defaultSubscriptionFormPassword" class="form-control" name="description"></textarea>
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Price (Rp)<span class="text-danger">*</span></label>
+            @if($errors->has('price'))
+                <div class="text-danger">{{ $errors->first('price') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="price">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Discount (%)</label>
+            @if($errors->has('discount'))
+                <div class="text-danger">{{ $errors->first('discount') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="discount">
         </div>
 
         <div class="mb-4">
             <label class="form-label" for="textAreaExample">Stock<span class="text-danger">*</span></label>
+            @if($errors->has('stock'))
+                <div class="text-danger">{{ $errors->first('stock') }}</div>
+            @endif
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="stock">
         </div>
 

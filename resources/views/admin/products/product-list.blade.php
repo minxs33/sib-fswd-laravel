@@ -7,7 +7,17 @@
 <div class="container-fluid card bg-white shadow-sm p-4">
     <h4 class="fw-semibold"><i class="fas fa-boxes-stacked"></i> Manage Products</h4>
     <hr class="border-success">
-    
+    @if (Session::get('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{Session::get('error')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif(Session::get('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{Session::get('success')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-3 mb-4">
             <a class="btn btn-outline-success" href="{{ url('/admin/products/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new product</a>
