@@ -18,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->select(["*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"])->orderBy("prod_id","ASC")->withCount("product_images")->get();
+        $products = Products::join("categories","products.category_id","=","categories.id")->join("users","products.created_by","=","users.id")->select(["products.*", "products.id as prod_id","categories.name as cat_name", "products.name as prod_name","users.name as users_name"])->orderBy("prod_id","ASC")->withCount("product_images")->get();
 
         // dd($products->toArray());
         if(Auth::user()->role == 1 || Auth::user()->role == 2){
@@ -126,7 +126,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Products::find($id);
+        
     }
 
     /**
@@ -137,7 +137,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Products::join("categories","products.category_id","=","categories.id")->select(["*", "products.id as prod_id","products.name as prod_name","categories.name as cat_name","categories.id as cat_id"])->find($id);
+        $product = Products::join("categories","products.category_id","=","categories.id")->select(["products.*", "products.id as prod_id","products.name as prod_name","categories.name as cat_name","categories.id as cat_id"])->find($id);
         $categories = Categories::all();
 
         return view("admin/products/product-update", array(

@@ -1,17 +1,11 @@
 @extends('templates/admin-app')
 
-@section('title','NAM - Carousel Lists')
+@section('title','NAM - Role Lists')
 
 @section('content')
 
-<style>
-.image-btn:hover{
-    cursor: pointer;
-    transform: scale(110%);
-}
-</style>
 <div class="container-fluid card bg-white shadow-sm p-4">
-    <h4 class="fw-semibold"><i class="fas fa-panorama"></i> Manage Carousels</h4>
+    <h4 class="fw-semibold"><i class="fas fa-users"></i> Manage roles</h4>
     <hr class="border-success">
 
         @if (Session::get('error'))
@@ -27,34 +21,26 @@
         @endif
     <div class="row">
         <div class="col-3 mb-4">
-            <a class="btn btn-outline-success" href="{{ url('/admin/carousels/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new carousel</a>
+            <a class="btn btn-outline-success" href="{{ url('/admin/roles/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new role</a>
         </div>
         
         <div class="col-12">
             <div class="table-responsive">
-                <table class="table table-hover text-center" id="carousels-table">
+                <table class="table table-hover text-center" id="roles-table">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Name</th>
-                            <th>Description</th>
-                            <th>Url</th>
-                            <th>Image</th>
-                            <th>Active Status</th>
                             <th>Created At</th>
                             <th>Last Updated</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="table-body">
-                        @foreach($carousels as $row)
+                        @foreach($roles as $row)
                         <tr>
                             <td>{{$loop->index+1}}</td>
-                            <td>{{$row['name']}}</td>
-                            <td>{{substr($row['description'],0,50)}}</td>
-                            <td>{{$row['url']}}</td>
-                            <td><img class="img-thumbnail object-fit-scale image-btn" src="{{ asset('storage/images/carousels/')}}/{{$row['image_url'] }}" alt="{{$row['image_url']}}" style="width:100px; height:auto;" data-mdb-toggle="modal" data-mdb-target="#image-Modal"></td>
-                            <td>{!!$row['is_active'] == 1 ? 'Active' : 'Non-active'!!}</td>
+                            <td>{{$row['role_name']}}</td>
                             <td>
                                 {{$row['created_at']->format('j F, Y. H:i')}}
                             </td>
@@ -62,8 +48,8 @@
                                 {{$row['updated_at']->format('j F, Y. H:i')}}
                             </td>
                             <td>
-                                <form method="POST" action="{{ url('admin/carousels/'.$row['id']) }}">
-                                    <a class="btn btn-warning btn-sm" href="{{ url('admin/carousels/'.$row['id'].'/edit') }}"><i class="fas fa-edit fa-sm"></i></a>
+                                <form method="POST" action="{{ url('admin/roles/'.$row['id']) }}">
+                                    <a class="btn btn-warning btn-sm" href="{{ url('admin/roles/'.$row['id'].'/edit') }}"><i class="fas fa-edit fa-sm"></i></a>
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" type="submit"><i class="fas fa-trash fa-sm"></i></button>
@@ -100,7 +86,7 @@
 
 <script>
     jQuery(() => {
-        $('#carousels-table').DataTable();
+        $('#roles-table').DataTable();
 
         $(document).on("click", ".image-btn",function(){
             // alert($((this)).attr("src"));

@@ -15,7 +15,7 @@ class CarouselController extends Controller
      */
     public function index()
     {
-        $carousels = Carousels::all();
+        $carousels = Carousels::orderBy("id","ASC")->get();
         return view("admin/carousels/carousel-list", array(
             "carousels" => $carousels
         ));

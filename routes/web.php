@@ -35,7 +35,10 @@ Route::group(["prefix"=>"admin"], function(){
         Route::resources([
             "products" => ProductController::class,
             "product_images" => Product_imageController::class,
-            "carousels" => CarouselController::class
+            "carousels" => CarouselController::class,
+            "categories" => CategoriesController::class,
+            "roles" => RoleController::class,
+            "users" => UserController::class,
         ]);
         
         Route::get("/product_images/create/{id}",["uses" =>"Product_imageController@create"]);

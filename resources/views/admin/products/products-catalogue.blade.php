@@ -1,6 +1,6 @@
 @extends('templates/admin-app')
 
-@section('title','NAM - Carousel Lists')
+@section('title','NAM - Carousel Catalogue')
 
 @section('content')
 <div class="container-fluid card bg-white shadow-sm p-4">

@@ -1,6 +1,6 @@
 @extends('templates/admin-app')
 
-@section('title','NAM - Add Product')
+@section('title','NAM - Edit Product')
 
 @section('content')
 

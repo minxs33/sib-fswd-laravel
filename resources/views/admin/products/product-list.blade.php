@@ -83,10 +83,10 @@
                                     {!!$row['status'] == 'active' ? '<div class="form-switch"><input class="form-check-input status" type="checkbox" value="'.$row['prod_id'].'" id="flexCheckChecked" checked></div>' : '<div class="form-switch"><input class="form-check-input status" type="checkbox" value="'.$row['prod_id'].'" id="flexCheckChecked"></div>'!!}
                                 </td>
                                 <td>
-                                    {{$row['updated_at']->format('j F, Y. H:i')}}
+                                    {{$row['created_at']->format('j F, Y. H:i')}}
                                 </td>
                                 <td>
-                                    {{$row['created_at']->format('j F, Y. H:i')}}
+                                    {{$row['updated_at']->format('j F, Y. H:i')}}
                                 </td>
                                 <td>
                                     {{$row['users_name']}}
