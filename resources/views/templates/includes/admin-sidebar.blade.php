@@ -38,7 +38,7 @@
 
         @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
         <li class="nav-item">
-            <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/categories') }}">
                 <i class="fas fa-book"></i>
                 <span>Product Categories</span>
             </a>
@@ -51,14 +51,14 @@
         </div>
 
         <li class="nav-item">
-            <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/roles') }}">
                 <i class="fas fa-users"></i>
                 <span>User Groups</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed text-muted" href="{{ url('/dashboard') }}">
+            <a class="nav-link collapsed text-muted" href="{{ url('admin/users') }}">
                 <i class="fas fa-user-alt"></i>
                 <span>User Lists</span>
             </a>
