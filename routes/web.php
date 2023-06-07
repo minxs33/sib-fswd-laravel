@@ -57,7 +57,7 @@ Route::group(["prefix"=>"admin"], function(){
         });
     });
 
-    Route::middleware("role:2|3")->group(function(){
+    Route::middleware("role:1|2|3")->group(function(){
         Route::get("/products",["uses" => "ProductController@index"]);
     });
     
