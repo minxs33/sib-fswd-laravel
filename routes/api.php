@@ -21,7 +21,7 @@ use App\Http\Controllers\api\ProductController;
 
 Route::prefix('v1')->group(function() {
     Route::resources([
-        "products" => ProductController::class
+        "product" => ProductController::class
     ]);
 });
 
