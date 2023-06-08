@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarouselController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::resources([
 Route::post("login/authenticate",["uses" =>"LoginController@authenticate"]);
 Route::post("logout",["uses" => "LoginController@logout"]);
 
-Route::group(["prefix"=>"admin"], function(){
+Route::group(["prefix"=>"admin", 'middleware' => ['auth']], function(){
 
     Route::get("/dashboard",["uses" => "AdminController@index"]);
     
@@ -60,5 +61,4 @@ Route::group(["prefix"=>"admin"], function(){
     Route::middleware("role:1|2|3")->group(function(){
         Route::get("/products",["uses" => "ProductController@index"]);
     });
-    
-})->middleware('auth');
+});

@@ -22,6 +22,8 @@ class Role
             // dd($request->user()->role);
             if ($request->user()->role == $value) {
                 return $next($request);
+            }else{
+                return abort(403, 'Unauthorized action');
             }
         }
 
