@@ -16,7 +16,7 @@
 
             <div class="dropdown">
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow text-black text-decoration-none" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img class="img rounded-circle" style="width:35px" src="{{asset('storage/images/avatar')}}/{{Auth::user()->avatar}}"> &nbsp; {{Auth::user()->name}} &nbsp; <i class="fas fa-chevron-down fa-sm"></i>
+                    <img class="img rounded-circle object-fit-cover" style="width:35px; height:35px;" src="{{asset('storage/images/avatar')}}/{{Auth::user()->avatar}}"> &nbsp; {{Auth::user()->name}} &nbsp; <i class="fas fa-chevron-down fa-sm"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                     <li>

@@ -38,6 +38,6 @@
         @endforeach
     </div>
 </div>
-<div class="mt-auto">
+<div>
     {{ $product->links('pagination::bootstrap-5') }}
 </div>

@@ -22,6 +22,24 @@ body{
     margin-left: -2.5rem !important;
 }
 
+.link-anchor {
+    color: #2aba79 !important;
+}
+
+.link-anchor:hover {
+    color: #198754 !important;
+}
+
+/* navbar dropdown */
+.dropdown-user:hover .dropdown-menu {
+    position:absolute;
+    right:0;
+    display: block;
+    margin-top: 0; /* remove the gap so it doesn't close */
+}
+
+
+
 /* carousels  */
 .owl-stage-outer{
     border-radius: 6px !important;

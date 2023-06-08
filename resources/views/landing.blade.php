@@ -1,11 +1,11 @@
 @extends("templates.app")
 
-@section("title", "Naufal Alwan")
+@section("title", "Naufal Alwan Merch")
 
 @section("content")
 
 <div class="container-md mt-4">
-    <div class="owl-carousel carousel owl-theme mb-5">
+    <div class="owl-carousel carousel owl-theme mb-5 shadow-sm">
         @foreach($carousels as $row)
             <img src="{{asset('storage/images/carousels')}}/{{$row['image_url']}}" alt="{{$row['image_url']}}" class="object-fit-cover carousel-items" style="max-height:430px;">
         @endforeach
@@ -13,8 +13,9 @@
 
     <section class="mb-5" id="kategori">
         <div class="d-flex flex-column gap-2">
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-start align-items-center gap-3">
                 <h5 class="fw-semibold">New in T-Shirt</h5>
+                <a href="#" class="text-decoration-none fw-bold link-anchor mb-2 fs-6">See more</a>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
@@ -57,8 +58,8 @@
                 
 
         <div class="d-flex flex-column gap-2 mt-4">
-            <div class="d-flex justify-content-between">
-                <h5 class="fw-semibold">New in Hoodie</h5>
+            <div class="d-flex justify-content-start gap-3">
+                <h5 class="fw-semibold">New in Hoodie</h5><a href="#" class="text-decoration-none fw-bold link-anchor mb-2 fs-6">See more</a>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
@@ -122,7 +123,7 @@
             var url = $(this).attr('href');
             // alert(url);  
             getData(url);
-            window.history.pushState("", "", url);
+            // window.history.pushState("", "", url);
         });
     });
 
