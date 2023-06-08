@@ -109,10 +109,22 @@ body{
     right: 0 !important;
 }
 
+/* all product pagination */
+
+.pagination > li > .page-link {
+    background-color: white;
+    color: #198754;
+}
+
+.pagination > li.active > .page-link{
+    background-color: #198754;
+    color: white;
+}
+
 /* admin product list */
 .form-check-input[type=checkbox]:checked {
-    background-color: #198754 !important;
+    background-color: #198754;
 }
 .form-switch .form-check-input:checked[type=checkbox]:after{
-    background-color: #0A3622 !important; 
+    background-color: #0A3622; 
 }

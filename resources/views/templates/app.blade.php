@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="owlcarousel/owl.carousel.min.css">
     <link rel="stylesheet" href="owlcarousel/owl.theme.default.min.css">
     <!-- <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}"> -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.js"></script>
     <title>@yield("title")</title>
 </head>
 <body>
@@ -21,7 +22,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="owlcarousel/owl.carousel.min.js"></script>
 <script src="{{asset('js/main.js')}}"></script>
 

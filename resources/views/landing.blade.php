@@ -97,6 +97,47 @@
             </div>
         </div>
     </section>
+
+    <section class="mb-5 products">
+        @include('templates/includes/product-card')
+    </section>
+    
 </div>
 
+<script>
+
+    jQuery(function(){
+        $('body').on('click', '.pagination a', function(e) {
+            e.preventDefault();
+
+            $('#load .page-link').css('color', '#0A3622');
+
+            $('#load').html(`
+            <div class="d-flex align-items-center justify-content-center mb-2" style="height:200px;">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>`);
+
+            var url = $(this).attr('href');
+            // alert(url);  
+            getData(url);
+            window.history.pushState("", "", url);
+        });
+    });
+
+    function getData(url) {
+        $.ajax({
+            url : url,
+            type: "GET",
+            dataType : "html"
+        }).done(function (data) {
+            $('.products').html(data);  
+        }).fail(function () {
+            $('.products').html(`
+                <div class="alert alert-danger> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>" 
+            `);  
+        });
+    }
+</script>
 @endsection
