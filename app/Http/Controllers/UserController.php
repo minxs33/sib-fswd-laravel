@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\models\Users;
-use App\models\Roles;
+use App\Models\Users;
+use App\Models\Roles;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
