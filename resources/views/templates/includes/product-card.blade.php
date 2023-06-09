@@ -1,11 +1,9 @@
-<div class="d-flex justify-content-center mb-2">
-    <h5 class="fw-semibold">All Products</h5>
-</div>
+
 <div id="load" class="mb-4" style="min-height: 400px;">
     <div class="row g-2">
         @foreach($product as $row)
             <a href="#" class="text-decoration-none col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                <div class="shadow-sm card border-0" style=" height:25rem">
+                <div class="shadow-sm card border-0" style="height:25rem">
                 @if($row['product_images_count'] != 0)
                     @foreach($row['product_images'] as $images)
                         @if($images['is_active'] == 1)

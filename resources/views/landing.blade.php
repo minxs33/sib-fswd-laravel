@@ -11,11 +11,11 @@
         @endforeach
     </div>
 
-    <section class="mb-5" id="kategori">
+    <section class="mb-4" id="kategori">
         <div class="d-flex flex-column gap-2">
-            <div class="d-flex justify-content-start align-items-center gap-3">
-                <h5 class="fw-semibold">New in T-Shirt</h5>
-                <a href="#" class="text-decoration-none fw-bold link-anchor mb-2 fs-6">See more</a>
+            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+                <label class="fw-semibold fs-5">New in T-Shirt</label>
+                <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
@@ -58,8 +58,9 @@
                 
 
         <div class="d-flex flex-column gap-2 mt-4">
-            <div class="d-flex justify-content-start gap-3">
-                <h5 class="fw-semibold">New in Hoodie</h5><a href="#" class="text-decoration-none fw-bold link-anchor mb-2 fs-6">See more</a>
+            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+                <label class="fw-semibold fs-5">New in Hoodie</label>
+                <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
@@ -99,8 +100,15 @@
         </div>
     </section>
 
-    <section class="mb-5 products">
-        @include('templates/includes/product-card')
+    <section class="mb-4">
+        <div class="d-flex flex-column gap-2">
+            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+                <label class="fw-semibold fs-5">All Products</label>
+            </div>
+            <div class="products">
+                @include('templates/includes/product-card')
+            </div>
+        </div>
     </section>
     
 </div>
@@ -123,7 +131,6 @@
             var url = $(this).attr('href');
             // alert(url);  
             getData(url);
-            // window.history.pushState("", "", url);
         });
     });
 
