@@ -25,12 +25,19 @@ class HomeController extends Controller
                 $query->where("is_active", "=", 1);
             }])->orderBy("products.id","DESC")->limit(12)->get(["products.*", "products.id as prod_id","products.name as prod_name"]);
 
-        $products = Products::with("product_images")->where("status","active")->withCount([
-            "product_images", 
+        $products = Products::with("product_images")->where("status", "active")->withCount([
             "product_images as product_images_count" => function ($query) {
-                $query->where("is_active", "=", 1);
-            }])->orderBy("products.id","DESC")->select(["products.*", "products.id as prod_id","products.name as prod_name"])->paginate(30);
-
+                $query->where("is_active", 1);
+            }
+        ])->orderBy("products.id", "DESC")->select(["products.*", "products.id as prod_id", "products.name as prod_name"])->paginate(30);
+        
+            // $products = Products::with("product_images")->where("status","active")->withCount([
+            // "product_images", 
+            // "product_images as product_images_count" => function ($query) {
+            //     $query->where("is_active", "=", 1);
+            // }])->orderBy("products.id","DESC")->select(["products.*", "products.id as prod_id","products.name as prod_name"])->paginate(30);
+        
+        dd($product_hoodie->toArray());
         if($request->ajax()){
             
             return view("templates/includes/product-card", array(
