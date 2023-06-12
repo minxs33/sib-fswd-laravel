@@ -68,16 +68,18 @@
             @foreach($hoodie as $row)
                 <a href="#" class="text-decoration-none">
                     <div class="shadow-sm card border-0" style=" height:25rem">
-                    @if($row['product_images_count'] == 0)
-                        <img src="{{asset('storage/images/product-images/default.png')}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">   
-                    @else
+                    @if($row['product_images_count'] != 0)
                         @foreach($row['product_images'] as $images)
                             @if($images['is_active'] == 1)
                                 <img src="{{asset('storage/images/product-images')}}/{{$images['image_url']}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">
                             @break
-                            
+                            @else
+                                <img src="{{asset('storage/images/product-images/default.png')}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">
+                            @break
                             @endif
                         @endforeach
+                    @else
+                        <img src="{{asset('storage/images/product-images/default.png')}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">
                     @endif
                         <div class="card-body p-2">
                             <small class="card-title fw-medium text-muted">{{substr($row['name'],0,50)}}</small>

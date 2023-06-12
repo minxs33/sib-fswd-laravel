@@ -37,7 +37,7 @@ class HomeController extends Controller
             //     $query->where("is_active", "=", 1);
             // }])->orderBy("products.id","DESC")->select(["products.*", "products.id as prod_id","products.name as prod_name"])->paginate(30);
         
-        dd($product_hoodie->toArray());
+        // dd($products->toArray());
         if($request->ajax()){
             
             return view("templates/includes/product-card", array(
