@@ -21,8 +21,9 @@
             <div class="owl-carousel category-carousel owl-theme">
 
             @foreach($tshirt as $row)
-                <a href="#" class="text-decoration-none">
+                <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none">
                     <div class="shadow-sm card border-0" style=" height:25rem">
+                    {{$row['id']}}
                     @if($row['product_images_count'] != 0)
                         @foreach($row['product_images'] as $images)
                             @if($images['is_active'] == 1)
@@ -66,7 +67,7 @@
             <div class="owl-carousel category-carousel owl-theme">
 
             @foreach($hoodie as $row)
-                <a href="#" class="text-decoration-none">
+                <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none">
                     <div class="shadow-sm card border-0" style=" height:25rem">
                     @if($row['product_images_count'] != 0)
                         @foreach($row['product_images'] as $images)
@@ -104,8 +105,17 @@
 
     <section class="mb-4">
         <div class="d-flex flex-column gap-2">
-            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+            <div class="d-flex justify-content-between align-items-center gap-3 bg-white px-3 py-2">
                 <label class="fw-semibold fs-5">All Products</label>
+                <div class="d-flex align-items-center gap-2">
+                    <label class="text-secondary">Categories</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
             </div>
             <div class="products">
                 @include('templates/includes/product-card')

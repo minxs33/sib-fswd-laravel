@@ -2,7 +2,7 @@
 <div id="load" class="mb-4" style="min-height: 400px;">
     <div class="row g-2">
         @foreach($product as $row)
-            <a href="#" class="text-decoration-none col-xl-2 col-lg-3 col-md-4 col-6">
+            <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none col-xl-2 col-lg-3 col-md-4 col-6">
                 <div class="shadow-sm card border-0" style="height:25rem">
                 
                 @if($row['product_images']->count() != 0)
