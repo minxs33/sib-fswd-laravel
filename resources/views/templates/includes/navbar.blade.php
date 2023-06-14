@@ -42,9 +42,9 @@
                         </div>
                     </form>
                     <nav class="d-flex">
-                        <ul class="nav">
+                        <!-- <ul class="nav">
                             <li class="nav-item"><a href="{{ url('/') }}" class="nav-link px-2 text-success fw-medium small">Home</a></li>
-                        </ul>
+                        </ul> -->
                         @if(Auth::check() && Auth::user()->role == 1)
                         <ul class="nav">
                             <li class="nav-item"><a href="{{ url('admin/dashboard') }}" class="nav-link px-2 text-success fw-medium small">Dashboard</a></li>

@@ -16,9 +16,15 @@
                 <div class="splide__track">
                     <ul class="splide__list">
                         @foreach($products['product_images'] as $row)
+                            @if($row['image_url'] == 0)
+                            <li class="splide__slide d-flex justify-content-center align-items-center">
+                                <img class="object-fit-cover rounded-sm" src="{{ asset('storage/images/product-images/default.png')}}" alt="{{ $row['name'] }}" style="max-height:500px">
+                            </li>
+                            @else
                             <li class="splide__slide d-flex justify-content-center align-items-center">
                                 <img class="object-fit-cover rounded-sm" src="{{ asset('storage/images/product-images/'. $row['image_url']) }}" alt="{{ $row['name'] }}" style="max-height:500px">
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
@@ -28,9 +34,15 @@
                     <div class="splide__track">
                         <ul class="splide__list">
                         @foreach($products['product_images'] as $row)
-                            <li class="splide__slide d-flex justify-content-center align-items-center">
-                                <img class="object-fit-scale img-fluid rounded-sm" src="{{ asset('storage/images/product-images/'. $row['image_url']) }}" alt="{{ $row['name'] }}">
-                            </li>
+                            @if($row['image_url'] == 0)
+                                <li class="splide__slide d-flex justify-content-center align-items-center">
+                                    <img class="object-fit-scale img-fluid rounded-sm" src="{{ asset('storage/images/product-images/default.png')}}" alt="{{ $row['name'] }}">
+                                </li>
+                            @else
+                                <li class="splide__slide d-flex justify-content-center align-items-center">
+                                    <img class="object-fit-scale img-fluid rounded-sm" src="{{ asset('storage/images/product-images/'. $row['image_url']) }}" alt="{{ $row['name'] }}">
+                                </li>
+                            @endif
                         @endforeach
                         </ul>
                     </div>

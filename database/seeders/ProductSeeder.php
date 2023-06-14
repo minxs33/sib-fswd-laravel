@@ -3,11 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Categories;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
 use App\Models\Products;
 use App\Models\Users;
 use Faker\Factory as FakerFactory;
+use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
 {
@@ -21,12 +20,12 @@ class ProductSeeder extends Seeder
         $faker = FakerFactory::create();
         $category = Categories::all()->pluck('id')->toArray();
         $user = Users::all()->pluck('id')->toArray();
-  
-        for ($i = 0; $i < 120; $i++) {
+
+        for ($i = 0; $i < 120; ++$i) {
             $category_id = $faker->randomElement($category);
             $created_by = $faker->randomElement($user);
-            $price = $faker->randomNumber(5,6);
-            $discount = $faker->randomFloat(2,0,25);
+            $price = $faker->randomNumber(5, 6);
+            $discount = $faker->randomFloat(2, 0, 25);
             $total_price = $price - (($price / 100) * $discount);
 
             Products::create([

@@ -23,7 +23,6 @@
             @foreach($tshirt as $row)
                 <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none">
                     <div class="shadow-sm card border-0" style=" height:25rem">
-                    {{$row['id']}}
                     @if($row['product_images_count'] != 0)
                         @foreach($row['product_images'] as $images)
                             @if($images['is_active'] == 1)
@@ -108,12 +107,12 @@
             <div class="d-flex justify-content-between align-items-center gap-3 bg-white px-3 py-2">
                 <label class="fw-semibold fs-5">All Products</label>
                 <div class="d-flex align-items-center gap-2">
-                    <label class="text-secondary">Categories</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <label class="text-secondary">Filter</label>
+                    <select class="form-select category" aria-label="Default select example">
+                        <option selected disabled>All</option>
+                        @foreach($categories as $row)
+                            <option value="{{$row['id']}}">{{ucfirst($row['name'])}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -128,7 +127,7 @@
 <script>
 
     jQuery(function(){
-        $('body').on('click', '.pagination a', function(e) {
+        $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
 
             $('#load .page-link').css('color', '#0A3622');
@@ -144,6 +143,12 @@
             // alert(url);  
             getData(url);
         });
+
+        $(document).on('change', '.category', function(e){
+            $.ajax({
+                url: "{{url()}}"
+            })
+        })
     });
 
     function getData(url) {
