@@ -28,7 +28,7 @@ Route::post('logout', ['uses' => 'LoginController@logout']);
 
 Route::get('/products/{id}', ['uses' => 'ProductController@show']);
 Route::group(['prefix' => '/ajaxReq'], function () {
-    Route::get('get-products-by-category', ['uses' => 'ProductController@getByCategory']);
+    Route::get('get-products-by-category/', ['uses' => 'HomeController@getByCategory']);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {

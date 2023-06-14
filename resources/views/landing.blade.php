@@ -109,7 +109,7 @@
                 <div class="d-flex align-items-center gap-2">
                     <label class="text-secondary">Filter</label>
                     <select class="form-select category" aria-label="Default select example">
-                        <option selected disabled>All</option>
+                        <option selected value="all">All</option>
                         @foreach($categories as $row)
                             <option value="{{$row['id']}}">{{ucfirst($row['name'])}}</option>
                         @endforeach
@@ -145,10 +145,30 @@
         });
 
         $(document).on('change', '.category', function(e){
+            e.preventDefault();
+
+            $('#load .page-link').css('color', '#0A3622');
+
+            $('#load').html(`
+            <div class="d-flex align-items-center justify-content-center mb-2" style="height:200px;">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>`);
+
             $.ajax({
-                url: "{{url()}}"
+                url: "{{url('/ajaxReq/get-products-by-category')}}",
+                data: {category:$(this).val()},
+                type: "GET",
+                dataType: "html"
+            }).done(function (data) {
+                $('.products').html(data);  
+            }).fail(function () {
+                $('.products').html(`
+                    <div class="alert alert-danger> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>" 
+                `);  
+            });
             })
-        })
     });
 
     function getData(url) {

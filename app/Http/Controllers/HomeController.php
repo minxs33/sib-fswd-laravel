@@ -52,4 +52,17 @@ class HomeController extends Controller
             'categories' => $categories,
         ]);
     }
+
+    public function getByCategory(Request $request)
+    {
+        if ($request->category == 'all') {
+            $products = Products::with('product_images')->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name'])->paginate(30);
+        } else {
+            $products = Products::with('product_images')->where('category_id', $request->category)->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name'])->paginate(30);
+        }
+
+        return view('templates/includes/product-card', [
+            'product' => $products,
+        ]);
+    }
 }
