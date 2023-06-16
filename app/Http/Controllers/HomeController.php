@@ -26,8 +26,6 @@ class HomeController extends Controller
                 $query->where('is_active', '=', 1);
             }])->orderBy('products.id', 'DESC')->limit(12)->get(['products.*', 'products.id as prod_id', 'products.name as prod_name']);
 
-        $products = Products::with('product_images')->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name'])->paginate(30);
-
         $categories = Categories::all();
 
         // $products = Products::with("product_images")->where("status","active")->withCount([
@@ -37,12 +35,28 @@ class HomeController extends Controller
         // }])->orderBy("products.id","DESC")->select(["products.*", "products.id as prod_id","products.name as prod_name"])->paginate(30);
 
         // dd($products->toArray());
+        $query = Products::with('product_images')->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name']);
+
         if ($request->ajax()) {
+            if ($request->category == 'all') {
+                if ($request->min && $request->max) {
+                    $query->where('price', '>=', $request->min)
+                        ->where('price', '<=', $request->max);
+                }
+            } elseif ($request->category) {
+                $query->where('category_id', $request->category);
+                if ($request->min && $request->max) {
+                    $query->where('price', '>=', $request->min)
+                        ->where('price', '<=', $request->max);
+                }
+            }
+            $products = $query->paginate(30);
+
             return view('templates/includes/product-card', [
                 'product' => $products,
             ]);
         }
-        // dd($product_tshirt->toArray());
+        $products = $query->paginate(30);
 
         return view('landing', [
             'carousels' => $carousels,
@@ -53,16 +67,38 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getByCategory(Request $request)
+    public function search(Request $request)
     {
-        if ($request->category == 'all') {
-            $products = Products::with('product_images')->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name'])->paginate(30);
-        } else {
-            $products = Products::with('product_images')->where('category_id', $request->category)->where('status', 'active')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name'])->paginate(30);
-        }
+        $query = Products::with('product_images')->where('status', 'active')->where('name', 'LIKE', '%'.$request->keyword.'%')->orderBy('products.id', 'DESC')->select(['products.*', 'products.id as prod_id', 'products.name as prod_name']);
 
-        return view('templates/includes/product-card', [
+        if ($request->ajax()) {
+            if ($request->category == 'all') {
+                if ($request->min && $request->max) {
+                    $query->where('price', '>=', $request->min)
+                        ->where('price', '<=', $request->max);
+                }
+            } elseif ($request->category) {
+                $query->where('category_id', $request->category);
+                if ($request->min && $request->max) {
+                    $query->where('price', '>=', $request->min)
+                        ->where('price', '<=', $request->max);
+                }
+            }
+            $products = $query->paginate(28);
+
+            return view('templates/includes/product-card-search', [
+                'product' => $products,
+            ]);
+        }
+        $products = $query->paginate(28);
+
+        $categories = Categories::all();
+
+        return view('product-search', [
             'product' => $products,
+            'title' => $request->keyword,
+            'categories' => $categories,
+            'keyword' => $request->keyword,
         ]);
     }
 }

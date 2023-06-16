@@ -25,14 +25,9 @@ jQuery(() => {
         lazyLoad:true,
         stagePadding: false,
         responsive: {
+
+       
             0: {
-                items: 2,
-                stagePadding: 15,
-                nav: false,
-                dots: false,
-                autoplayHoverPause: false,
-            },
-            576: {
                 items: 2,
                 stagePadding: 15,
                 nav: false,
@@ -65,4 +60,5 @@ jQuery(() => {
         // autoplayTimeout:3000,
         loop: false,
     })
+
 })

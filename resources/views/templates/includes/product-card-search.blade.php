@@ -1,8 +1,13 @@
 
-<div id="load" class="mb-2" style="min-height: 400px;">
+<div id="load" class="mb-2" style="min-height: 800px;">
+    @if($product->count() == 0)
+        <div class="alert alert-warning">There is no product in this category</div>
+    @else
     <div class="row g-2 mb-2">
+
+
         @foreach($product as $row)
-            <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none col-xl-2 col-lg-3 col-md-4 col-6">
+            <a href="{{url('/products/')}}/{{$row['id']}}" class="text-decoration-none col-xl-3 col-lg-3 col-md-6 col-6">
                 <div class="shadow-sm card border-0" style="height:25rem">
                 
                 @if($row['product_images']->count() != 0)
@@ -33,6 +38,7 @@
             </a>
         @endforeach
     </div>
+    @endif
     @if($product->hasPages())
     <div class="bg-white rounded-bottom px-3 pt-3 mb-4 shadow-sm">
         {{ $product->links('pagination::bootstrap-5') }}

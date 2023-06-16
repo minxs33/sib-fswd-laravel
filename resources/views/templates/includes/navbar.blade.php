@@ -31,11 +31,12 @@
         </div>
             <div class="col-lg-6 py-2">
                 <div class="d-flex flex-column">
-                    <form class="col-12 mb-3 mb-lg-0">
+                    <form action="{{url('search')}}" class="col-12 mb-3 mb-lg-0">
+                        @csrf
                         <div class="input-group">
-                            <input class="form-control border-end-0 rounded-pill" type="search" placeholder="T-Shirt, Jacket, Hoodie, and more..">
+                            <input name="keyword" class="form-control border-end-0 rounded-pill" type="search" placeholder="T-Shirt, Jacket, Hoodie, and more..">
                             <span class="input-group-append">
-                                <button class="btn btn-outline-success border-bottom-0 border rounded-pill search-button" type="button">
+                                <button class="btn btn-outline-success border-bottom-0 border rounded-pill search-button" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>

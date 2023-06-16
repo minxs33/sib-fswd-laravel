@@ -13,7 +13,7 @@
 
     <section class="mb-4" id="kategori">
         <div class="d-flex flex-column gap-2">
-            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2 rounded-top shadow-sm">
                 <label class="fw-semibold fs-5">New in T-Shirt</label>
                 <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
             </div>
@@ -37,7 +37,7 @@
                         <img src="{{asset('storage/images/product-images/default.png')}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">
                     @endif
                         <div class="card-body p-2">
-                            <small class="card-title fw-medium text-muted">{{substr($row['name'],0,50)}}</small>
+                            <small class="card-title fw-medium text-muted">{{substr($row['name'],0,40)}}</small>
                             <div class="d-flex flex-column mt-1">
                                 <label class="fw-semibold">Rp{{$row['total_price']}}
                                 </label>
@@ -58,7 +58,7 @@
                 
 
         <div class="d-flex flex-column gap-2 mt-4">
-            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2">
+            <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2 rounded-top shadow-sm">
                 <label class="fw-semibold fs-5">New in Hoodie</label>
                 <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
             </div>
@@ -82,7 +82,7 @@
                         <img src="{{asset('storage/images/product-images/default.png')}}" class="card-img-top object-fit-cover" alt="Product Photo" style="width:100%; height: 240px;">
                     @endif
                         <div class="card-body p-2">
-                            <small class="card-title fw-medium text-muted">{{substr($row['name'],0,50)}}</small>
+                            <small class="card-title fw-medium text-muted">{{substr($row['name'],0,40)}}</small>
                             <div class="d-flex flex-column mt-1">
                                 <label class="fw-semibold">Rp{{$row['total_price']}}
                                 </label>
@@ -104,11 +104,11 @@
 
     <section class="mb-4">
         <div class="d-flex flex-column gap-2">
-            <div class="d-flex justify-content-between align-items-center gap-3 bg-white px-3 py-2">
+            <div class="d-flex justify-content-between align-items-center gap-3 bg-white px-3 py-2 rounded-top shadow-sm">
                 <label class="fw-semibold fs-5">All Products</label>
                 <div class="d-flex align-items-center gap-2">
                     <label class="text-secondary">Filter</label>
-                    <select class="form-select category" aria-label="Default select example">
+                    <select class="form-select rounded-pill category" aria-label="Default select example">
                         <option selected value="all">All</option>
                         @foreach($categories as $row)
                             <option value="{{$row['id']}}">{{ucfirst($row['name'])}}</option>
@@ -157,7 +157,7 @@
             </div>`);
 
             $.ajax({
-                url: "{{url('/ajaxReq/get-products-by-category')}}",
+                url: "{{url('/')}}",
                 data: {category:$(this).val()},
                 type: "GET",
                 dataType: "html"
@@ -165,22 +165,24 @@
                 $('.products').html(data);  
             }).fail(function () {
                 $('.products').html(`
-                    <div class="alert alert-danger> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>" 
+                    <div class="alert alert-danger"> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>
                 `);  
             });
             })
     });
 
     function getData(url) {
+        var category = $(".category").val();
         $.ajax({
             url : url,
+            data: {category: category},
             type: "GET",
             dataType : "html"
         }).done(function (data) {
             $('.products').html(data);  
         }).fail(function () {
             $('.products').html(`
-                <div class="alert alert-danger> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>" 
+                <div class="alert alert-danger"> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>
             `);  
         });
     }

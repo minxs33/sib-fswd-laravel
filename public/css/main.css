@@ -12,6 +12,7 @@ body{
     background-color: rgb(238, 238, 238);
     /* margin: 0 0 82px 0; */
     font-family: 'Poppins', sans-serif;
+    height:100%;
 }
 
 .logo-title {
@@ -138,6 +139,16 @@ body{
     background-color: #198754;
     color: white;
 }
+
+/* product view carousels */
+.splide__slide {
+    opacity: 0.6;
+}
+  
+.splide__slide.is-active {
+    opacity: 1;
+}
+
 
 /* admin product list */
 .form-check-input[type=checkbox]:checked {

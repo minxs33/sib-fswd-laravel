@@ -27,9 +27,7 @@ Route::post('login/authenticate', ['uses' => 'LoginController@authenticate']);
 Route::post('logout', ['uses' => 'LoginController@logout']);
 
 Route::get('/products/{id}', ['uses' => 'ProductController@show']);
-Route::group(['prefix' => '/ajaxReq'], function () {
-    Route::get('get-products-by-category/', ['uses' => 'HomeController@getByCategory']);
-});
+Route::get('/search', ['uses' => 'HomeController@search']);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/dashboard', ['uses' => 'AdminController@index']);

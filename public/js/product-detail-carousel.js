@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded',function(){
 var main = new Splide('#main-slider',{
     type: 'fade',
     rewind: true,
-    pagination: false,
+    pagination: true,
     arrows: false,
 });
 
@@ -14,11 +14,18 @@ var thumbnails = new Splide('#thumbnail-slider',{
     pagination: false,
     isNavigation: true,
     breakpoints: {
-        600: {
-            fixedWidth : 60,
-            fixedHeight: 44,
+        576: {
+            arrows: false,
+            Width : 60,
+            Height: 44,
+        },
+        768 : {
+            arrows: false,
+            Width : 70,
+            Height: 54,
         },
     },
+    arrows: true,
 });
 
 main.sync(thumbnails);
