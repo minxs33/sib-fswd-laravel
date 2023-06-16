@@ -36,7 +36,7 @@ class ProductSeeder extends Seeder
                 'discount' => $discount,
                 'price' => $price,
                 'total_price' => intval(preg_replace('/[^\d.]/', '', $total_price)),
-                'status' => $faker->randomElement(['active', 'non-active']),
+                'status' => $faker->randomElement(['active', 'non-active', 'waiting']),
                 'stock' => $faker->randomNumber(2),
             ]);
         }

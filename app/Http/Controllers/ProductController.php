@@ -70,7 +70,11 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->total_price = $request->price - (($request->price / 100) * $request->discount);
         $product->stock = $request->stock;
-        $product->status = $request->status == '1' ? 'active' : 'non-active';
+        if ($request->status) {
+            $product->status = $request->status == '1' ? 'active' : 'non-active';
+        } else {
+            $product->status = 'waiting';
+        }
         $product->save();
 
         $imageFields = [];
