@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\CarouselController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,15 +33,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::middleware('role:1')->group(function () {
         Route::resources([
-            'products' => ProductController::class,
             'product_images' => Product_imageController::class,
-            'carousels' => CarouselController::class,
             'categories' => CategoriesController::class,
             'roles' => RoleController::class,
             'users' => UserController::class,
         ]);
 
         Route::get('/product_images/create/{id}', ['uses' => 'Product_imageController@create']);
+        Route::get('product-confirmation', ['uses' => 'ProductController@productConfirmation']);
 
         Route::group(['prefix' => '/ajaxReq'], function () {
             Route::post('/change-product-status', ['uses' => 'ProductController@getStatus']);
@@ -52,12 +50,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     });
 
     Route::middleware('role:1|2')->group(function () {
-        Route::group(['prefix' => '/ajaxReq'], function () {
-            Route::post('/product-image-list', ['uses' => 'Product_imageController@getProductImage']);
-        });
+        Route::resources([
+            'products' => ProductController::class,
+            'carousels' => CarouselController::class,
+        ]);
     });
 
     Route::middleware('role:1|2|3')->group(function () {
         Route::get('/products', ['uses' => 'ProductController@index']);
+    });
+
+    Route::middleware('role:1|2')->group(function () {
+        Route::group(['prefix' => '/ajaxReq'], function () {
+            Route::post('/product-image-list', ['uses' => 'Product_imageController@getProductImage']);
+        });
     });
 });

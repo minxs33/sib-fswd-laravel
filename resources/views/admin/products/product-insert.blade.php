@@ -75,6 +75,7 @@
             <input type="text" id="defaultSubscriptionFormPassword" class="form-control" name="stock">
         </div>
 
+        @if(Auth::user()->role == 1)
         <div class="mb-4">
             <label class="form-label mb-0" for="textAreaExample">Product Status</label><br>
             <div class="badge badge-info mb-3" for="textAreaExample">Determines wether or not the product is displayed</div>
@@ -82,6 +83,7 @@
                 <input class="form-check-input" type="checkbox" name="status[]" value="1" id="flexSwitchCheckChecked">
             </div>
         </div>
+        @endif
 
         <div class="mb-4">
             <label class="form-label mb-0" for="textAreaExample">Product Images</label><br>

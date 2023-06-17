@@ -18,12 +18,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::join('categories', 'products.category_id', '=', 'categories.id')->join('users', 'products.created_by', '=', 'users.id')->select(['products.*', 'products.id as prod_id', 'categories.name as cat_name', 'products.name as prod_name', 'users.name as users_name'])->orderBy('prod_id', 'ASC')->withCount('product_images')->get();
+        $products = Products::join('categories', 'products.category_id', '=', 'categories.id')->join('users', 'products.created_by', '=', 'users.id')->where('status', '!=', 'waiting')->select(['products.*', 'products.id as prod_id', 'categories.name as cat_name', 'products.name as prod_name', 'users.name as users_name'])->orderBy('prod_id', 'ASC')->withCount('product_images')->get();
 
-        // dd($products->toArray());
+        $products_waiting = Products::where('status', '=', 'waiting')->count();
+
+        // dd($products_waiting);
         if (Auth::user()->role == 1 || Auth::user()->role == 2) {
             return view('admin/products/product-list', [
                 'products' => $products,
+                'products_waiting' => $products_waiting,
             ]);
         } elseif (Auth::user()->role == 3) {
             return view('admin/products/products-catalogue', [
@@ -70,9 +73,9 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->total_price = $request->price - (($request->price / 100) * $request->discount);
         $product->stock = $request->stock;
-        if ($request->status) {
+        if (Auth::user()->role == 1) {
             $product->status = $request->status == '1' ? 'active' : 'non-active';
-        } else {
+        } elseif (Auth::user()->role == 2) {
             $product->status = 'waiting';
         }
         $product->save();
@@ -230,5 +233,47 @@ class ProductController extends Controller
         } else {
             return response()->json(['message' => 'Product not found'], 404);
         }
+    }
+
+    public function productConfirmation(Request $request)
+    {
+        $products = Products::join('categories', 'products.category_id', '=', 'categories.id')->join('users', 'products.created_by', '=', 'users.id')->where('status', '=', 'waiting')->select(['products.*', 'products.id as prod_id', 'categories.name as cat_name', 'products.name as prod_name', 'users.name as users_name'])->orderBy('prod_id', 'ASC')->withCount('product_images')->get();
+
+        if ($request->ajax()) {
+            if ($request->get_products_id) {
+                $product = Products::with('product_images')->join('categories', 'products.category_id', '=', 'categories.id')->join('users', 'products.created_by', '=', 'users.id')->select(['products.*', 'products.id as prod_id', 'categories.name as cat_name', 'products.name as prod_name', 'users.name as users_name'])->find($request->get_products_id);
+
+                if ($product) {
+                    return response()->json($product);
+                } else {
+                    return response()->json(['error' => 'Product not found'], 404);
+                }
+            } elseif ($request->approve_products_id) {
+                $product = Products::where('id', $request->approve_products_id)->update([
+                    'status' => 'non-active',
+                ]);
+
+                if ($product) {
+                    return response()->json($product);
+                } else {
+                    return response()->json(['error' => 'Product not found'], 404);
+                }
+            } elseif ($request->deny_products_id) {
+                $product_images = Product_images::where('products_id', $request->deny_products_id)->get();
+                foreach ($product_images as $row) {
+                    Storage::delete('public/images/product-images/'.$row['image_url']);
+                }
+                Product_images::where('products_id', $request->deny_products_id)->delete();
+                Products::find($request->deny_products_id)->delete();
+            }
+
+            return view('templates/includes/product-admin-card', [
+                'products' => $products,
+            ]);
+        }
+
+        return view('admin/products/product-confirmation', [
+            'products' => $products,
+        ]);
     }
 }

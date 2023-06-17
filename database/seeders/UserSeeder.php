@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 use App\Models\Users;
 use Faker\Factory as FakerFactory;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -41,7 +40,7 @@ class UserSeeder extends Seeder
             'name' => 'user',
             'email' => 'user@user.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('user'),
+            'password' => Hash::make('user123'),
         ]);
 
         // for ($i = 0; $i < 5; $i++) {

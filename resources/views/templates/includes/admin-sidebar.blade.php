@@ -36,7 +36,7 @@
             </a>
         </li>
 
-        @if(Auth::user()->role == 1 || Auth::user()->role == 2 )
+        @if(Auth::user()->role == 1)
         <li class="nav-item">
             <a class="nav-link collapsed text-muted" href="{{ url('admin/categories') }}">
                 <i class="fas fa-book"></i>

@@ -18,10 +18,24 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    <div class="row">
-        <div class="col-3 mb-4">
-            <a class="btn btn-outline-success" href="{{ url('/admin/products/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add new product</a>
+    <div class="row align-items-center">
+        <div class="col-4 mb-4">
+            <a class="btn btn-outline-success btn-sm" href="{{ url('/admin/products/create') }}" class="text-white text-decoration-none"><i class="fas fa-plus"></i> Add product</a>
         </div>
+        @if(Auth::user()->role == 1)
+        <div class="col-8 mb-4 d-flex gap-2 align-items-center">
+            <div>
+                <a href="{{url('admin/product-confirmation')}}" class="btn btn-sm btn-warning image-modal position-relative text-black fw-bold">
+                    {{$products_waiting}}
+                    <span class="position-absolute top-0 start-100 translate-middle">
+                        <i class="fas fa-circle-exclamation text-danger"></i>
+                    <span class="small visually-hidden">Product waiting for approval</span>
+                    </span>
+                </a>
+            </div>
+            <small>Products waiting for approval</small>
+        </div>
+        @endif
         <div class="col-12">
             <div class="table-responsive">
                 <table class="table table-hover text-center" id="products-table">
@@ -190,7 +204,7 @@
             })
         }
         $(document).on("click", ".image-modal",function(){
-            reloadImage($((this)).val());
+            reloadImage($(this).val());
         })
 
         $(document).on("change", ".image-status",function(){
