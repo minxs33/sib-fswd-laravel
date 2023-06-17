@@ -81,7 +81,7 @@
                                     {{substr($row['description'],0,50)}}
                                 </td>
                                 <td>
-                                    @if($row['discount'] != null)
+                                    @if($row['discount'] != 0)
                                         Rp{{$row['total_price']}}
                                         <div class="badge badge-danger">{{$row['discount']}}%</div>
                                         <div class="text-decoration-line-through">Rp{{$row['price']}}</div>
