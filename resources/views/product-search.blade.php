@@ -13,7 +13,7 @@
                 <label class="fw-bold text-success">Filters</label>
             </div>
             
-            <div class="bg-white p-3 rounded-sm shadow-sm rounded-bottom">
+            <div class="bg-white p-3 rounded-sm shadow-sm rounded-bottom d-flex flex-column gap-2">
                 <label class="fw-bold text-success small">Categories</label>
                 <div class="ms-1 mt-1">
                     <div class="form-check">
@@ -31,6 +31,20 @@
                     </div>
                     @endforeach
                 </div>
+
+                <label class="fw-bold text-success small">Price</label>
+                <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="input-group">
+                        <span class="input-group-text rounded-pill rounded-end" id="basic-addon1">Rp</span>
+                        <input type="text" class="form-control form-control-sm rounded-pill rounded-start min" placeholder="Min">
+                    </div>
+                    <i class="fas fa-minus text-success"></i>
+                    <div class="input-group">
+                        <span class="input-group-text rounded-pill rounded-end" id="basic-addon1">Rp</span>
+                        <input type="text" class="form-control form-control-sm rounded-pill rounded-start max" placeholder="Max">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-sm btn-success btn-apply rounded-pill">Apply</button>
             </div>
         </div>
         <div class="col-12 col-lg-9 d-flex flex-column gap-1">
@@ -46,7 +60,6 @@
 
 <script>
     jQuery(function(){
-
         $(document).on('click', '.pagination a', function(e) {
             e.preventDefault();
 
@@ -65,42 +78,78 @@
         });
 
         $(document).on("click", ".categories", function(){
+            var min = $(".min").val();
+            var max = $(".max").val();
 
-            $('#load .page-link').css('color', '#0A3622');
-
-            $('#load').html(`
-            <div class="d-flex align-items-center justify-content-center mb-2" style="height:800px;">
-                <div class="spinner-border text-success" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>`);
+            loader();
             var category = $(this).val();
-            // alert(category)
             $.ajax({
                 url : "{{url('/search')}}",
-                data: {category: category, keyword: "{{$keyword}}"},
+                data: {category: category, keyword: "{{$keyword}}", min:min, max:max},
                 type: "GET",
                 dataType : "html"
             }).done(function (data) {
-                    $('.products').html(data);  
+                scrollTop();
+                $('.products').html(data);  
             }).fail(function () {
+                scrollTop()
+                $('.products').html(`
+                    <div class="alert alert-danger"> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>
+                `);  
+            });
+        })
+
+        $(document).on("click", ".btn-apply", function(){
+            var min = $(".min").val();
+            var max = $(".max").val();
+
+            loader();
+            var category = $(".categories:checked").val();
+            $.ajax({
+                url : "{{url('/search')}}",
+                data: {category: category, keyword: "{{$keyword}}", min:min, max:max},
+                type: "GET",
+                dataType : "html"
+            }).done(function (data) {
+                scrollTop();
+                $('.products').html(data);  
+            }).fail(function () {
+                scrollTop()
                 $('.products').html(`
                     <div class="alert alert-danger"> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>
                 `);  
             });
         })
     })
+    
+    function loader(){
+        $('#load').html(`
+            <div class="d-flex align-items-center justify-content-center mb-2" style="height:800px;">
+                <div class="spinner-border text-success" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>`);
+    }
 
+    function scrollTop(){
+        $('html, body').animate({
+            scrollTop: $("#load").offset().top
+        }, 2000);
+    }
     function getData(url) {
-        var category = $(".category").val();
+        var category = $(".categories:checked").val();
+        var min = $(".min").val();
+        var max = $(".max").val();
         $.ajax({
             url : url,
-            data: {category: category, keyword: "{{$keyword}}"},
+            data: {category: category, keyword: "{{$keyword}}", min:min, max:max},
             type: "GET",
             dataType : "html"
         }).done(function (data) {
+            scrollTop()
             $('.products').html(data);  
         }).fail(function () {
+            scrollTop()
             $('.products').html(`
                 <div class="alert alert-danger> Product failed to load, click <a href="#here" onclick="location.reload()">here<a> to refresh the page </div>
             `);  
