@@ -33,13 +33,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
     Route::middleware('role:1')->group(function () {
         Route::resources([
-            'product_images' => Product_imageController::class,
             'categories' => CategoriesController::class,
             'roles' => RoleController::class,
             'users' => UserController::class,
         ]);
 
-        Route::get('/product_images/create/{id}', ['uses' => 'Product_imageController@create']);
         Route::get('product-confirmation', ['uses' => 'ProductController@productConfirmation']);
 
         Route::group(['prefix' => '/ajaxReq'], function () {
@@ -53,7 +51,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
         Route::resources([
             'products' => ProductController::class,
             'carousels' => CarouselController::class,
+            'product_images' => Product_imageController::class,
         ]);
+        Route::get('/product_images/create/{id}', ['uses' => 'Product_imageController@create']);
     });
 
     Route::middleware('role:1|2|3')->group(function () {

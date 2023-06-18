@@ -74,14 +74,14 @@ class HomeController extends Controller
         if ($request->ajax()) {
             if ($request->category == 'all') {
                 if ($request->min && $request->max) {
-                    $query->where('price', '>=', $request->min)
-                        ->where('price', '<=', $request->max);
+                    $query->where('total_price', '>=', $request->min)
+                        ->where('total_price', '<=', $request->max);
                 }
             } elseif ($request->category) {
                 $query->where('category_id', $request->category);
                 if ($request->min && $request->max) {
-                    $query->where('price', '>=', $request->min)
-                        ->where('price', '<=', $request->max);
+                    $query->where('total_price', '>=', $request->min)
+                        ->where('total_price', '<=', $request->max);
                 }
             }
             $products = $query->paginate(28);

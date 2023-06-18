@@ -6,7 +6,7 @@
 
 @section("content")
 
-<div class="container-md mt-4">
+<div class="container-md my-4">
     <div class="row gx-2">
         <div class="col-12 col-lg-3 d-flex flex-column gap-1 mb-4">
             <div class="bg-white p-3 rounded-sm shadow-sm rounded-top">
@@ -47,7 +47,7 @@
                 <button type="button" class="btn btn-sm btn-success btn-apply rounded-pill">Apply</button>
             </div>
         </div>
-        <div class="col-12 col-lg-9 d-flex flex-column gap-1">
+        <div class="col-12 col-lg-9 d-flex flex-column gap-1 top">
             <div class="bg-white p-3 rounded-sm shadow-sm rounded-top">
                 <label class="fw-bold text-success">Search for "{{$keyword}}"</label>
             </div>
@@ -133,8 +133,8 @@
 
     function scrollTop(){
         $('html, body').animate({
-            scrollTop: $("#load").offset().top
-        }, 2000);
+            scrollTop: $("nav").offset().top
+        });
     }
     function getData(url) {
         var category = $(".categories:checked").val();
