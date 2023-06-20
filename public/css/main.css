@@ -149,6 +149,18 @@ body{
     opacity: 1;
 }
 
+/* radio button search */
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+
+/* remove input number arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 /* admin product list */
 .form-check-input[type=checkbox]:checked {

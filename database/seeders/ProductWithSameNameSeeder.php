@@ -21,7 +21,7 @@ class ProductWithSameNameSeeder extends Seeder
         $categories = Categories::all(['id', 'name'])->toArray();
         $user = Users::all()->pluck('id')->toArray();
 
-        for ($i = 0; $i < 240; ++$i) {
+        for ($i = 0; $i < 120; ++$i) {
             $category = $faker->randomElement($categories);
             $category_id = $category['id'];
             $created_by = $faker->randomElement($user);

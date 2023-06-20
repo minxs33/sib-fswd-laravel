@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css" />
     <link rel="stylesheet" href="{{ asset('css/fontawesome/css/all.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/logo-merch-light.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
 
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
