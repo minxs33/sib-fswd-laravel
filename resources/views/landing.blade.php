@@ -15,7 +15,7 @@
         <div class="d-flex flex-column gap-2">
             <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2 rounded-top shadow-sm">
                 <label class="fw-semibold fs-5">New in T-Shirt</label>
-                <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
+                <!-- <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a> -->
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
@@ -60,7 +60,7 @@
         <div class="d-flex flex-column gap-2 mt-4">
             <div class="d-flex justify-content-start align-items-center gap-3 bg-white px-3 py-2 rounded-top shadow-sm">
                 <label class="fw-semibold fs-5">New in Hoodie</label>
-                <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a>
+                <!-- <a href="#" class="text-decoration-none fw-bold link-anchor fs-6 mt-1">See more</a> -->
             </div>
             
             <div class="owl-carousel category-carousel owl-theme">
