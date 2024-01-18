@@ -62,7 +62,6 @@ class ProductController extends Controller
             'description' => 'required|min:3',
             'price' => "required|regex:/^[0-9]+(\.[0-9][0-9]?)?$/",
             'stock' => 'required|integer',
-            'discount' => 'integer',
         ]);
 
         $product = new Products();

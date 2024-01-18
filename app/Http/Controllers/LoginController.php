@@ -27,8 +27,13 @@ class LoginController extends Controller
 
         if (auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate();
+            $user = auth::user();
+            if($user->role == 1 || $user->role == 2){
+                return redirect(url("admin/dashboard"));
+            }else{
+                return redirect(url("/"));
+            }
 
-            return redirect(url("admin/dashboard"));
         }
 
         return redirect()->back()->with('error', 'The email or password is wrong!');
